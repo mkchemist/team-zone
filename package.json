@@ -1,0 +1,39 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.13.13",
+        "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "browser-sync": "^2.27.5",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "formik": "^2.2.9",
+        "jquery": "^3.6",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "moment": "^2.29.1",
+        "popper.js": "^1.16.1",
+        "postcss": "^8.1.14",
+        "prop-types": "^15.7.2",
+        "react": "^17.0.2",
+        "react-big-calendar": "^0.33.6",
+        "react-dom": "^17.0.2",
+        "react-redux": "^7.2.4",
+        "react-router-dom": "^5.2.0",
+        "redux": "^4.1.0",
+        "redux-thunk": "^2.3.0",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1",
+        "sweetalert2": "^11.1.0",
+        "yup": "^0.32.9"
+    }
+}
