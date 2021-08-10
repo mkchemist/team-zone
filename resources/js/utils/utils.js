@@ -10,6 +10,21 @@ export const baseApiUrl = document.getElementById('app_base_api_url').value;
 export const baseUri = document.getElementById('app_base_uri').value;
 
 /**
+ * generate app url
+ * @param {String} url
+ * @returns
+ */
+export const generateUrl = (url = "") => baseApiUrl.replace("api", url)
+
+/**
+ * generate image url
+ *
+ * @param {String} url
+ * @returns
+ */
+export const imgUrl = (url = "") => generateUrl(`images/app/${url}`)
+
+/**
  * generate full url from the given url
  *
  * @param {String} url
@@ -22,4 +37,14 @@ export function url(url = "") {
   return baseApiUrl+url;
 }
 
-
+/**
+ * get query search param
+ *
+ * @param {String} search
+ * @param {String} key
+ * @returns {String}
+ */
+export function getQuerySearch(search, key) {
+  let params = new URLSearchParams(search);
+  return params.get(key)
+}

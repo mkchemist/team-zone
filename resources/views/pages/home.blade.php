@@ -2,25 +2,8 @@
 
 
 @section('content')
-    <div class="bg-primary shadow">
-        <nav class="navbar navbar-expand-lg navbar-dark container">
-            <a href="{{ url('/') }}" class="navbar-brand font-weight-bold">TeamZone</a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#home_navbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse" id="home_navbar">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a href="{{ url('/') }}" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a href="{{ url('/help') }}" class="nav-link">Help</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="container bg-white vh-100 shadow">
+    @include('includes.navbar')
+    <div class="container-fluid bg-white wrapper shadow">
         <div class="row mx-auto">
             <div class="col-lg-6">
 

@@ -21,7 +21,7 @@ class PlannerEventFactory extends Factory
      */
     public function definition()
     {
-        $date = $this->faker->date('20y-08-d');
+        $date = $this->faker->date('2021-08-d');
         return [
           'user_id' => rand(1,3),
           'planner_id' => rand(1,4),

@@ -1,0 +1,55 @@
+<?php
+
+namespace {{ namespace }};
+
+
+use App\Services\Service;
+{{ serviceModelRequire }}
+
+class {{ class }} extends Service
+{
+    /**
+     * get all item from {{ serviceModel }}
+     *
+     * @param array $only [default = null]
+     * @return {{ serviceModel }}
+     */
+    public function all(array $only = null)
+    {
+      // getting all goes here
+    }
+
+    /**
+     * create a new item
+     *
+     * @param array $data
+     * @return \Illuminate\Http\Response
+     */
+    public function create(array $data)
+    {
+      // create goes here
+    }
+
+    /**
+     * Update the given resource
+     *
+     * @param int $id [resource id]
+     * @param array $data [array of data to be updated]
+     * @return \Illuminate\Http\Response
+     */
+    public function update(int $id, array $data)
+    {
+      // update goes here
+    }
+
+    /**
+     * delete the given resource
+     *
+     * @param int $id [resource id]
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(int $id)
+    {
+      // delete goes here
+    }
+}

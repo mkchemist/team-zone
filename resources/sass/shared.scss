@@ -1,0 +1,39 @@
+@import "./variables";
+.wrapper {
+  min-height: 550px;
+}
+
+.bg-teal {
+  background-color: $teal;
+}
+
+.text-lightgreen {
+  color: $lightgreen !important;
+}
+
+.rbc-event {
+  margin:0;
+  padding:0 !important;
+}
+.rbc-event-content {
+  * {
+    padding:.2rem 0.3rem;
+    font-size: smaller;
+  }
+}
+
+.icon-img-sm {
+  width:20px;
+}
+
+.icon-img {
+  width:25px;
+}
+
+.icon-img-xl {
+  width:50px;
+}
+
+.icon-img-5xl {
+  width:150px;
+}

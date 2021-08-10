@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Helpers\ResponseHelper;
 use App\Models\User;
+use Exception;
 
 class Service {
 
@@ -15,6 +17,17 @@ class Service {
     $this->user = $user;
 
     $this->params = $params;
+  }
+
+  /**
+   * set query params
+   *
+   * @param array $data
+   * @return void
+   */
+  protected function setQueryParam(array $data)
+  {
+    $this->params = $data;
   }
 
   /**
@@ -43,6 +56,22 @@ class Service {
   {
     return count($this->params) > 0 ? true : false;
   }
+
+
+  public function first(string $model, array $data)
+  {
+    $only = [];
+    if(isset(request()->query_fields)) {
+      $only = array_merge($only, request()->query_fields);
+    }
+    if($only) {
+      return $model::where($data)->first($only);
+    }
+    return $model::where($data)->first();
+
+  }
+
+
 
 
 }

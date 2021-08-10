@@ -1,24 +1,42 @@
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { fetchingCalendarsFromApiService } from "../store/calendars/actions";
 import AppConfig from "./config/app-config"
+import AppNavbar from "./components/AppNavbar";
+import DashboardPage from "./Pages/DashboardPage"
+import CalendarsPage from "./Pages/CalendarsPage";
+import { startFetchingCalendars } from "../store/actions/calendar-actions";
+import ViewCalendar from "./Pages/ViewCalendar";
+import PlannerPage from "./Pages/PlannerPage";
 
-function App({dispatch}) {
+function App({}) {
+  let dispatch = useDispatch();
+  let calendarStore = useSelector(state => state.CalendarStore);
+  React.useEffect(() => {
+    if(calendarStore.status == "idle") {
+      dispatch(startFetchingCalendars());
+    }
+  }, [calendarStore.status])
 
-  dispatch(fetchingCalendarsFromApiService({
-    url: "calendars"
-  }))
 
   return (
     <div>
       <Router basename={AppConfig.baseUri}>
-        <h1>Hello,World</h1>
+        <AppNavbar />
+        <div className="container-fluid bg-white wrapper shadow pb-5">
+          <Switch>
+            <Route path="/" component={DashboardPage} exact/>
+            <Route path="/calendars" component={CalendarsPage} />
+            <Route path="/view/:id" component={ViewCalendar} />
+            <Route path="/planners" component={PlannerPage} />
+          </Switch>
+        </div>
       </Router>
     </div>
   );
 }
 
 
-const mapStateToProps = state => state;
-export default connect(mapStateToProps)(App);
+/* const mapStateToProps = state => state;
+export default connect(mapStateToProps)(App); */
+export default App;

@@ -24,9 +24,47 @@
     <title>{{ env('APP_NAME') }}</title>
 </head>
 
-<body>
+<body class="bg-light">
     @yield('content')
-
+    <footer class="bg-primary text-light p-2 pt-5">
+        <div class="text-center">
+            <h2>
+                <span class="far fa-calendar-check"></span>
+                <span>TeamZone</span>
+            </h2>
+            <p>Make planning fun</p>
+            <div>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-light">
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-light">
+                            <span>Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-light">
+                            <span>Register</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-light">
+                            <span>Help</span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="small">
+                  Copyrights
+                  <span>&copy;</span> {{ date('20y') }}
+                  <span class="font-weight-bold">TeamZone</span>.
+                  All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </footer>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
 </body>

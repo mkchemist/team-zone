@@ -21,19 +21,22 @@ class UserSeeder extends Seeder
             'name' => 'Mohamed Kamal',
             'email' => 'm.k_chemist@yahoo.com',
             'password' => Hash::make(123456),
-            'api_token' => Str::random()
+            'api_token' => Str::random(),
+            'email_verified_at' => date('20y-m-d h:i:s')
           ],
           [
             'name' => 'Alaa Adel',
             'email' => 'alaa_adel@nerhadou.com',
             'password' => Hash::make(123456),
-            'api_token' => Str::random()
+            'api_token' => Str::random(),
+            'email_verified_at' => date('20y-m-d h:i:s')
           ],
           [
             'name' => 'Heba Abdelaal',
             'email' => 'heba_abdelaal@nerhadou.com',
             'password' => Hash::make(123456),
-            'api_token' => Str::random()
+            'api_token' => Str::random(),
+            'email_verified_at' => date('20y-m-d h:i:s')
           ],
         ]);
     }

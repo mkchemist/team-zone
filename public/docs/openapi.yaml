@@ -1,0 +1,584 @@
+openapi: 3.0.3
+info:
+  title: TeamZone
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/user:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/user/email/check:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: drolfson@example.com
+              required:
+                - email
+      security: []
+  /api/login:
+    post:
+      summary: 'user login'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: bergnaum.gussie@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: odio
+              required:
+                - email
+                - password
+      security: []
+  /api/register:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: illum
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: wreinger@example.net
+                password:
+                  type: string
+                  description: ''
+                  example: ea
+              required:
+                - name
+                - email
+                - password
+      security: []
+  /api/users/calendars:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    title: 'Calendar name'
+                    desc: 'Calendar description'
+                    planners_count: 1
+                    user:
+                      name: username
+                      email: 'user email'
+                      id: 1
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: '201'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "[\n\"message\" : \"Calendar {calendar name } created successfully\",\n\"timestamp\" : \"2021-08-05 01:00 pm\"\n\"data\" :{\n \"id\" : 1,\n \"title\" : \"Calendar name\",\n \"desc\" : \"Calendar description\",\n \"planners_count\" : 1,\n \"user\" : {\n   \"name\" : \"username\",\n   \"email\" : \"user email\",\n   \"id\" : 1\n }\n}]"
+        409:
+          description: '409'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "[\n  \"message\" : \"Item Already Exists\"\n]"
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'the calendar title'
+                  example: qui
+                desc:
+                  type: string
+                  description: 'Calendar description'
+                  example: qui
+              required:
+                - title
+      security: []
+  '/api/users/calendars/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: query
+          name: id
+          description: "Required Calendar Id\n @response {\n \"id\" : 1,\n \"title\" : \"Calendar name\",\n \"desc\" : \"Calendar description\",\n \"planners_count\" : 1,\n \"user\" : {\n   \"name\" : \"username\",\n   \"email\" : \"user email\",\n   \"id\" : 1\n }\n}"
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: "Required Calendar Id\n @response {\n \"id\" : 1,\n \"title\" : \"Calendar name\",\n \"desc\" : \"Calendar description\",\n \"planners_count\" : 1,\n \"user\" : {\n   \"name\" : \"username\",\n   \"email\" : \"user email\",\n   \"id\" : 1\n }\n}"
+            example: 1
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: '@queryParam id int Required Calendar Id'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: "Required Calendar title\n @bodyParam desc string Calendar description\n @response 201 [\n 'message' : 'Calendar Updated successfully',\n data: {\n \"id\" : 1,\n \"title\" : \"Calendar name\",\n \"desc\" : \"Calendar description\",\n \"planners_count\" : 1,\n \"user\" : {\n   \"name\" : \"username\",\n   \"email\" : \"user email\",\n   \"id\" : 1\n }\n}]"
+                  example: laboriosam
+                desc:
+                  type: string
+                  description: ''
+                  example: est
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: '@queryParam id int Required Calendar id you want to delete'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: '200'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "[\n   'message' => 'Calendar deleted successfully'\n ]"
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the calendar.'
+        example: 19
+        required: true
+        schema:
+          type: integer
+  /api/users/planners:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: ea
+                bg_color:
+                  type: string
+                  description: ''
+                  example: voluptatem
+                color:
+                  type: string
+                  description: ''
+                  example: est
+                icon:
+                  type: string
+                  description: ''
+                  example: delectus
+                desc:
+                  type: string
+                  description: ''
+                  example: dolor
+              required:
+                - title
+      security: []
+  '/api/users/planners/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: odit
+                bg_color:
+                  type: string
+                  description: ''
+                  example: incidunt
+                color:
+                  type: string
+                  description: ''
+                  example: minus
+                icon:
+                  type: string
+                  description: ''
+                  example: ullam
+                desc:
+                  type: string
+                  description: ''
+                  example: nam
+              required:
+                - title
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the planner.'
+        example: 5
+        required: true
+        schema:
+          type: integer
