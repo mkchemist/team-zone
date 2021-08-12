@@ -14,6 +14,7 @@ import BackButton from "../../../components/BackButton";
 import HttpService from "../../../service/http-service";
 import apiScheme from "../../../constant/api-scheme";
 import Swal from "sweetalert2";
+import { calendarRequest } from "../../../store/actions/view-calendar";
 
 function EditPlanner() {
   {
@@ -52,6 +53,9 @@ function EditPlanner() {
           toast: true
         })
         dispatch(fetchPlanners())
+        dispatch(calendarRequest({
+          id
+        }))
       }).catch(err => {
         console.log(err)
       })

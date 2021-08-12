@@ -20,9 +20,24 @@ export const generateUrl = (url = "") => baseApiUrl.replace("api", url)
  * generate image url
  *
  * @param {String} url
- * @returns
+ * @returns {String}
  */
 export const imgUrl = (url = "") => generateUrl(`images/app/${url}`)
+
+/**
+ * generate profile image url
+ *
+ * @param {String} url
+ * @returns {String}
+ */
+export const profileImage = (url = "") => generateUrl(`images/users/${url}`);
+
+/**
+ * default profile image url
+ *
+ * @returns {String}
+ */
+export const defaultProfileImage = () => profileImage("default-avatar.jpg")
 
 /**
  * generate full url from the given url

@@ -22,7 +22,7 @@ const CalendarListItem = ({ calendar, deleteCalendar }) => {
   }, [currentUser]);
 
   return (
-    <div className="border-bottom my-2 d-flex justify-content-between align-items-center">
+    <div className="border-bottom my-2 d-md-flex justify-content-between align-items-center">
       <div>
         <Link
           to={`/view/${calendar.id}`}

@@ -42,4 +42,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    protected $with = ['image'];
+
+    public function image() {
+      return $this->morphOne(\App\Models\Images::class,'model');
+    }
 }

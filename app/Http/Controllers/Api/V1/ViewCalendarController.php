@@ -13,7 +13,9 @@ class ViewCalendarController extends Controller
     {
       $events  = PlannerEvent::whereIn('planner_id', function($query) use($id) {
         $query->from('planners')->select('id')
-        ->where('calendar_id', $id)->get();
+        ->where('calendar_id', $id)
+        ->where('deleted_at', null)
+        ->get();
       })->simplePaginate(100);
 
       return PlannerEventResource::collection($events);

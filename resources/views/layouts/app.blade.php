@@ -42,25 +42,51 @@
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-light">
-                            <span>Login</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-light">
-                            <span>Register</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link text-light">
                             <span>Help</span>
                         </a>
                     </li>
+                    @guest
+                        <li class="nav-item">
+                            <a href="" class="nav-link text-light">
+                                <span>Login</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link text-light">
+                                <span>Register</span>
+                            </a>
+                        </li>
+                    @endguest
+                    @auth
+                        <li class="nav-item">
+                            <a href="{{ url('dashboard/calendars') }}" class="nav-link text-light">
+                                <span>Calendars</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('dashboard/planners') }}" class="nav-link text-light">
+                                <span>Planners</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('dashboard/profile') }}" class="nav-link text-light">
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('logout') }}" class="nav-link text-light">
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    @endauth
+
                 </ul>
                 <p class="small">
-                  Copyrights
-                  <span>&copy;</span> {{ date('20y') }}
-                  <span class="font-weight-bold">TeamZone</span>.
-                  All Rights Reserved
+                    Copyrights
+                    <span>&copy;</span> {{ date('20y') }}
+                    <span class="font-weight-bold far fa-calendar-check"></span>
+                    <span class="font-weight-bold">TeamZone</span>.
+                    All Rights Reserved
                 </p>
             </div>
         </div>

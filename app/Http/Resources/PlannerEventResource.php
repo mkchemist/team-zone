@@ -20,11 +20,12 @@ class PlannerEventResource extends JsonResource
           'start' => date($this->start),
           'end' => date($this->end),
           'allDay' => false,
-          'fav' => $this->fav,
+          'fav' => $this->fav ? true : false,
           'user' => [
             'name' => $this->user->name,
             'email' => $this->user->email,
-            'id' => $this->user->id
+            'id' => $this->user->id,
+            'img' => $this->user->image ? $this->user->image->url : null
           ],
           'style' => [
             'backgroundColor' => $this->planner->bg_color,

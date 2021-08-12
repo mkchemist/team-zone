@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
-import LoadingComponent from "../../../components/LoadingComponent";
+import NoDataFound from "../../../components/NoDataFound";
 
 function ViewCalendarPlannerSelect({ list, onUpdate }) {
   let [viewList, setViewList] = React.useState([]);
@@ -51,7 +51,7 @@ function ViewCalendarPlannerSelect({ list, onUpdate }) {
             ))}
           </nav>
         ) : (
-          <LoadingComponent />
+          <NoDataFound text={'No Planners found'} textClass={'small text-primary'} />
         )}
 
         <div className="text-right">

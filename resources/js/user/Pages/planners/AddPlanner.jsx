@@ -9,7 +9,7 @@ import apiScheme from "../../../constant/api-scheme";
 import Swal from "sweetalert2";
 import { fetchPlanners } from "../../../store/actions/planner-actions";
 import BackButton from "../../../components/BackButton";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import LoadingComponent from "../../../components/LoadingComponent";
 
 function AddPlanner() {
@@ -18,6 +18,7 @@ function AddPlanner() {
   let dispatch = useDispatch();
   let [calendars, setCalendars] = React.useState([]);
   let location = useLocation();
+  let history = useHistory()
 
   let formik = useFormik({
     initialValues: {
@@ -43,6 +44,7 @@ function AddPlanner() {
             timerProgressBar: true,
           });
           dispatch(fetchPlanners());
+          history.push("/planners")
         })
         .catch((err) => {
           console.log(err);

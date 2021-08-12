@@ -6,6 +6,7 @@ import {
   SET_VIEW_CALENDAR_ID,
   START_FETCH_VIEW_CALENDAR,
 } from "../types/actions-types";
+import moment from "moment";
 
 import HttpService from "../../service/http-service"
 

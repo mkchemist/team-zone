@@ -2,6 +2,7 @@ export default [
   'fa fa-user',
   'far fa-user',
   'fa fa-user-graduate',
+  'fa fa-user-md',
   'fa fa-calendar',
   'far fa-calendar',
   'fa fa-home',

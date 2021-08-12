@@ -59,7 +59,7 @@
                         <span class="fa fa-check-circle"></span>
                         <span>Register</span>
                     </button>
-                    <a href="" class="my-2 small">
+                    <a href="{{ url("/") }}" class="my-2 small">
                         <span>log in instead ?</span>
                     </a>
                 </div>

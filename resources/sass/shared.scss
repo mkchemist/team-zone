@@ -11,14 +11,22 @@
   color: $lightgreen !important;
 }
 
-.rbc-event {
-  margin:0;
+
+
+.rbc-event, .rbc-event-content {
+  margin:0 !important;
   padding:0 !important;
+  box-shadow: 2px 2px 2px 2px #1112 !important;
+  background-color: transparent !important;
 }
 .rbc-event-content {
   * {
-    padding:.2rem 0.3rem;
-    font-size: smaller;
+    margin:.05rem 0;
+    padding:.05rem 0.3rem;
+    font-size: 9px;
+    @media(min-width:768px) {
+      font-size: 10px;
+    }
   }
 }
 

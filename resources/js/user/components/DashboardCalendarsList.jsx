@@ -32,7 +32,7 @@ function DashboardCalendarsList() {
           {calendars.map((cal, i) => (
             <div
               key={`cal_${cal.id}`}
-              className="col-6 row align-items-center justify-content-start"
+              className="col-md-6 row align-items-center justify-content-start"
             >
               <div className="">
 
@@ -42,8 +42,10 @@ function DashboardCalendarsList() {
                   className="icon-img-xl"
                 />
               </div>
-              <Link to={`/view/${cal.id}`} className="nav-link col">
-                <p className="mb-0">{cal.title}</p>
+              <Link to={`/view/${cal.id}`} className="nav-link col" title={`Created by ${cal.user.name}<${cal.user.email}>`}>
+                <p className="mb-0">
+                  <span>{cal.title}</span>
+                </p>
                 <p className="small text-muted">
                   {" "}
                   {cal.desc || "No description"}

@@ -9,9 +9,9 @@ function AsideNav({ items }) {
         <Link
           to={item.path}
           key={`side_nav_item_${item.title}_${itemIndex}`}
-          className="list-group-item text-decoration-none text-dark small"
+          className="list-group-item text-decoration-none text-dark"
         >
-          {item.icon && <span className={item.icon}></span>}
+          {item.icon && <span className={`${item.icon} mr-1`}></span>}
           <span>{item.title}</span>
         </Link>
       ))}

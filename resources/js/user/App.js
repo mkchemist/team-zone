@@ -8,6 +8,7 @@ import CalendarsPage from "./Pages/CalendarsPage";
 import { startFetchingCalendars } from "../store/actions/calendar-actions";
 import ViewCalendar from "./Pages/ViewCalendar";
 import PlannerPage from "./Pages/PlannerPage";
+import ProfilePage from "./Pages/ProfilePage";
 
 function App({}) {
   let dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App({}) {
             <Route path="/calendars" component={CalendarsPage} />
             <Route path="/view/:id" component={ViewCalendar} />
             <Route path="/planners" component={PlannerPage} />
+            <Route path='/profile' component={ProfilePage} />
           </Switch>
         </div>
       </Router>

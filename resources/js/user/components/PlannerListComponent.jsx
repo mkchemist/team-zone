@@ -42,7 +42,7 @@ const PlannerListComponentItem = ({ item }) => {
 
   return (
     <div className="my-2">
-      <div className="d-flex align-items-center">
+      <div className="d-md-flex align-items-center align-items-center border-bottom pb-2">
         <div>
           <span className="fa-stack fa-2x">
             <span
@@ -59,18 +59,22 @@ const PlannerListComponentItem = ({ item }) => {
           <p className="mb-0 lead">{item.title}</p>
           <p className="mb-0 text-muted">{item.desc || "No description"}</p>
           <p className="mb-0 small">
-            {item.calendar.title} | {item.user.name}
+            <Link to={`/view/${item.calendar.id}`} className="text-dark" title={`view ${item.calendar.title} calendar`}>{item.calendar.title} </Link>
+             |
+            <Link to={`/users/${item.user.id}`} className="text-dark" title={`view ${item.user.name} Profile`}> {item.user.name}</Link>
           </p>
         </div>
-        <div className="btn-group btn-group-sm">
-          <Link to={`/planners/edit/${item.id}`} className="btn btn-secondary">
-            <span className="far fa-edit mr-1"></span>
-            <span>Edit</span>
-          </Link>
-          <a href="" className="btn btn-secondary" onClick={e => deletePlanner(item)}>
-            <span className="fa fa-trash mr-1"></span>
-            <span>Delete</span>
-          </a>
+        <div className="text-center">
+          <div className="btn-group btn-group-sm my-lg-0 my-1">
+            <Link to={`/planners/edit/${item.id}`} className="btn btn-secondary">
+              <span className="far fa-edit mr-1"></span>
+              <span>Edit</span>
+            </Link>
+            <a href="" className="btn btn-secondary" onClick={e => deletePlanner(item)}>
+              <span className="fa fa-trash mr-1"></span>
+              <span>Delete</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
