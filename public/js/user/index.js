@@ -5694,6 +5694,108 @@ NoDataFound.propTypes = {
 
 /***/ }),
 
+/***/ "./resources/js/components/SearchBox.jsx":
+/*!***********************************************!*\
+  !*** ./resources/js/components/SearchBox.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+function SearchBox(_ref) {
+  var placeholder = _ref.placeholder,
+      id = _ref.id,
+      inputClass = _ref.inputClass,
+      autoSearch = _ref.autoSearch,
+      onSearch = _ref.onSearch,
+      searchButtonText = _ref.searchButtonText;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(''),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      keyword = _React$useState2[0],
+      setKeyword = _React$useState2[1];
+
+  var startSearch = function startSearch(e) {
+    onSearch(keyword);
+  };
+
+  var handleSearchInput = function handleSearchInput(e) {
+    setKeyword(e.target.value);
+
+    if (autoSearch) {
+      onSearch(e.target.value);
+    }
+
+    if (e.key === "Enter") {
+      startSearch(keyword);
+    }
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "form-inline",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      type: "search",
+      name: id,
+      id: id,
+      placeholder: placeholder,
+      className: inputClass,
+      value: keyword,
+      onChange: handleSearchInput,
+      onKeyPress: handleSearchInput
+    }), !autoSearch && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+      className: "btn btn-sm btn-primary",
+      onClick: startSearch,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "fa fa-search mr-1"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        children: searchButtonText
+      })]
+    })]
+  });
+}
+
+SearchBox.defaultProps = {
+  placeholder: "Search ...",
+  id: "search_box",
+  inputClass: 'form-control form-control-sm col mr-1',
+  autoSearch: true,
+  searchButtonText: 'Search'
+};
+SearchBox.propTypes = {
+  placeholder: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
+  id: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
+  inputClass: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
+  autoSearch: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().bool),
+  onSearch: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func.isRequired)
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBox);
+
+/***/ }),
+
 /***/ "./resources/js/components/UserProfilePictureComponent.jsx":
 /*!*****************************************************************!*\
   !*** ./resources/js/components/UserProfilePictureComponent.jsx ***!
@@ -5786,9 +5888,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   calendars: "v1/calendars",
   planners: "v1/planners",
-  events: 'v1/events',
+  events: "v1/events",
   profile: {
-    picture: 'v1/user/picture'
+    picture: "v1/user/picture"
+  },
+  friends: "v1/user/friends",
+  friendsSearch: "v1/search/friends",
+  friendRequests: "v1/user/friend-requests",
+  permission: {
+    calendars: 'v1/user/permissions/calendars',
+    planners: 'v1/user/permissions/planners'
   }
 });
 
@@ -5806,6 +5915,116 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (['fa fa-user', 'far fa-user', 'fa fa-user-graduate', 'fa fa-user-md', 'fa fa-calendar', 'far fa-calendar', 'fa fa-home', 'fa fa-star', 'far fa-star', 'fa fa-cog', 'fa fa-cogs', 'fa fa-clone', 'fa fa-chalkboard', 'fa fa-book', 'fa fa-book-reader', 'fa fa-save', 'fa fa-plus', 'fa fa-plus-circle', 'fa fa-edit', 'far fa-edit', 'fa fa-trash', 'fa fa-times', 'fa fa-times-circle', 'fa fa-hospital', 'fa fa-store', 'fa fa-user-friends', 'fa fa-users', 'fa fa-gifts', 'fa fa-gift', 'fa fa-thumbs-up', 'fa fa-database', 'fa fa-cloud-moon', 'fa fa-moon', 'fa fa-desktop', 'fa fa-map-marker-alt', 'fa fa-rss', 'fa fa-oil-can', 'fa fa-fan', 'fa fa-music', 'fa fa-rocket', 'fa fa-play', 'fa fa-drum', 'fa fa-medal', 'fa fa-bell', 'fa fa-bicycle', 'fa fa-birthday-cake', 'fa fa-bomb', 'fa fa-code', 'fa fa-book', 'fa fa-book-open', 'fa fa-book-reader', 'fa fa-sticky-note', 'far fa-sticky-note', 'fa fa-print', 'far fa-newspaper', 'fa fa-comments', 'fa fa-comment', 'fa fa-comment-alt', 'fa fa-comment-dots', 'fa fa-headphones', 'fa fa-coffee', 'fa fa-mug-hot', 'fa fa-university', 'fa fa-address-card', 'fa fa-bullhorn', 'fa fa-pen']);
+
+/***/ }),
+
+/***/ "./resources/js/helpers/friends-helper.js":
+/*!************************************************!*\
+  !*** ./resources/js/helpers/friends-helper.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "isAFriend": () => (/* binding */ isAFriend),
+/* harmony export */   "IsFriendshipAccepted": () => (/* binding */ IsFriendshipAccepted),
+/* harmony export */   "removeFromFriendList": () => (/* binding */ removeFromFriendList)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _user_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../user/store */ "./resources/js/user/store/index.js");
+
+
+
+
+
+var user = _user_store__WEBPACK_IMPORTED_MODULE_4__.default.getState().UserStore;
+/**
+ * check if the given user is a friend of
+ * current user or not
+ *
+ * @param {Object} friend
+ * @returns {Boolean}
+ */
+
+var isAFriend = function isAFriend(friend) {
+  var is_a_friend = false;
+  var friendsGroup = friend.friends;
+
+  if (!friendsGroup || !friendsGroup.length) {
+    return is_a_friend;
+  }
+
+  friendsGroup.map(function (item) {
+    if (item.user_id === user.data.id || item.friend_id === user.data.id) {
+      is_a_friend = true;
+    }
+  });
+  return true;
+};
+/**
+ * check if friendship of the given user
+ * is accepted
+ *
+ * @param {Object} friend
+ * @returns {Boolean}
+ */
+
+var IsFriendshipAccepted = function IsFriendshipAccepted(friend) {
+  return friend.friends[0].accepted === 1;
+};
+var removeFromFriendList = function removeFromFriendList(id) {
+  window.event.preventDefault();
+  return _service_http_service__WEBPACK_IMPORTED_MODULE_3__.default.delete(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_2__.default.friends + "/".concat(id), {
+    friend_id: id
+  }).then(function (_ref) {
+    var data = _ref.data;
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+      title: 'Success',
+      text: 'Action completed',
+      icon: 'success',
+      toast: true,
+      timer: 3000,
+      timerProgressBar: true
+    });
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/hooks/useFriendsStore.js":
+/*!***********************************************!*\
+  !*** ./resources/js/hooks/useFriendsStore.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/actions/friends-actions */ "./resources/js/store/actions/friends-actions.js");
+
+
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var store = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.FriendsStore;
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (store.status === "idle") {
+      dispatch((0,_store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_2__.fetchFriends)());
+    }
+  }, [store.status]);
+  return store;
+}
 
 /***/ }),
 
@@ -5883,6 +6102,110 @@ function startFetchingCalendars() {
       dispatch(handleCalendarRequest(data.data));
     })["catch"](function (err) {
       dispatch(handleCalendarRequestError(err));
+    });
+  };
+}
+
+/***/ }),
+
+/***/ "./resources/js/store/actions/friends-actions.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/store/actions/friends-actions.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "startFriendsRequest": () => (/* binding */ startFriendsRequest),
+/* harmony export */   "handleFriendsRequest": () => (/* binding */ handleFriendsRequest),
+/* harmony export */   "handleFriendsRequestError": () => (/* binding */ handleFriendsRequestError),
+/* harmony export */   "fetchFriends": () => (/* binding */ fetchFriends)
+/* harmony export */ });
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _types_actions_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types/actions-types */ "./resources/js/store/types/actions-types.js");
+
+
+
+var startFriendsRequest = function startFriendsRequest() {
+  return {
+    type: _types_actions_types__WEBPACK_IMPORTED_MODULE_2__.START_FRIENDS_REQUEST
+  };
+};
+var handleFriendsRequest = function handleFriendsRequest(payload) {
+  return {
+    type: _types_actions_types__WEBPACK_IMPORTED_MODULE_2__.HANDLE_FRIENDS_REQUEST,
+    payload: payload
+  };
+};
+var handleFriendsRequestError = function handleFriendsRequestError(error) {
+  return {
+    type: _types_actions_types__WEBPACK_IMPORTED_MODULE_2__.HANDLE_FRIENDS_REQUEST_ERROR,
+    error: error
+  };
+};
+var fetchFriends = function fetchFriends() {
+  return function (dispatch) {
+    dispatch(startFriendsRequest);
+    _service_http_service__WEBPACK_IMPORTED_MODULE_1__.default.get(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_0__.default.friends).then(function (_ref) {
+      var data = _ref.data;
+      dispatch(handleFriendsRequest(data.data));
+    })["catch"](function (err) {
+      console.log(err);
+      dispatch(handleFriendsRequestError(err));
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/actions/permissions-actions.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/store/actions/permissions-actions.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "startFetchPermissions": () => (/* binding */ startFetchPermissions),
+/* harmony export */   "handleFetchPermission": () => (/* binding */ handleFetchPermission),
+/* harmony export */   "handleFetchPermissionError": () => (/* binding */ handleFetchPermissionError),
+/* harmony export */   "fetchPermissions": () => (/* binding */ fetchPermissions)
+/* harmony export */ });
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _types_actions_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types/actions-types */ "./resources/js/store/types/actions-types.js");
+
+
+
+function startFetchPermissions() {
+  return {
+    type: _types_actions_types__WEBPACK_IMPORTED_MODULE_2__.START_FETCH_PERMISSIONS
+  };
+}
+function handleFetchPermission(payload) {
+  return {
+    type: _types_actions_types__WEBPACK_IMPORTED_MODULE_2__.HANDLE_FETCH_PERMISSIONS,
+    payload: payload
+  };
+}
+function handleFetchPermissionError(error) {
+  return {
+    type: _types_actions_types__WEBPACK_IMPORTED_MODULE_2__.HANDLE_FETCH_PERMISSIONS_ERROR,
+    error: error
+  };
+}
+function fetchPermissions() {
+  return function (dispatch) {
+    dispatch(startFetchPermissions());
+    _service_http_service__WEBPACK_IMPORTED_MODULE_1__.default.get(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_0__.default.permission.calendars).then(function (_ref) {
+      var data = _ref.data;
+      dispatch(handleFetchPermission(data.data));
+    })["catch"](function (err) {
+      console.log(err);
+      dispatch(handleFetchPermissionError(err.message));
     });
   };
 }
@@ -6148,6 +6471,159 @@ var InitialCalendarState = {
         status: "failed",
         error: action.error
       });
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
+/***/ "./resources/js/store/reducers/friends-reducer.js":
+/*!********************************************************!*\
+  !*** ./resources/js/store/reducers/friends-reducer.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _types_actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/actions-types */ "./resources/js/store/types/actions-types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  /**
+   * request status
+   * available status [idle, loading, succeeded, failed]
+   *
+   * @var {String}
+   */
+  status: "idle",
+
+  /**
+   * friends data
+   *
+   * @var {Array}
+   */
+  data: [],
+
+  /**
+   * friends request error
+   *
+   * @var {String|null}
+   */
+  error: null
+};
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _types_actions_types__WEBPACK_IMPORTED_MODULE_0__.START_FRIENDS_REQUEST:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        status: 'loading'
+      });
+
+    case _types_actions_types__WEBPACK_IMPORTED_MODULE_0__.HANDLE_FRIENDS_REQUEST:
+      return {
+        data: action.payload,
+        status: 'succeeded',
+        error: null
+      };
+
+    case _types_actions_types__WEBPACK_IMPORTED_MODULE_0__.HANDLE_FRIENDS_REQUEST_ERROR:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        error: action.error
+      });
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
+/***/ "./resources/js/store/reducers/permissions-reducer.js":
+/*!************************************************************!*\
+  !*** ./resources/js/store/reducers/permissions-reducer.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _types_actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/actions-types */ "./resources/js/store/types/actions-types.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  /**
+   * status
+   * [idle, loading, succeeded, failed]
+   *
+   * @var {String}
+   */
+  status: 'idle',
+
+  /**
+   * request error
+   *
+   * @var {String|null}
+   */
+  error: null,
+
+  /**
+   * user permissions
+   *
+   * @var {Array}
+   */
+  userPermissions: [],
+
+  /**
+   * user friends permissions
+   *
+   * @var {Array}
+   */
+  friendsPermissions: []
+};
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _types_actions_types__WEBPACK_IMPORTED_MODULE_0__.START_FETCH_PERMISSIONS:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        status: 'loading'
+      });
+
+    case _types_actions_types__WEBPACK_IMPORTED_MODULE_0__.HANDLE_FETCH_PERMISSIONS:
+      return {
+        status: 'succeeded',
+        userPermissions: action.payload.user_permissions,
+        friendsPermissions: action.payload.friends_permissions,
+        error: null
+      };
+
+    case _types_actions_types__WEBPACK_IMPORTED_MODULE_0__.HANDLE_FETCH_PERMISSIONS_ERROR:
+      return {
+        status: 'failed',
+        userPermissions: [],
+        friendsPermissions: [],
+        error: payload.error
+      };
 
     default:
       return state;
@@ -6442,7 +6918,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MARK_LOADING_VIEW_CALENDAR_AS_DONE": () => (/* binding */ MARK_LOADING_VIEW_CALENDAR_AS_DONE),
 /* harmony export */   "START_PLANNER_REQUEST": () => (/* binding */ START_PLANNER_REQUEST),
 /* harmony export */   "HANDLE_PLANNER_REQUEST": () => (/* binding */ HANDLE_PLANNER_REQUEST),
-/* harmony export */   "HANDLE_PLANNER_REQUEST_ERROR": () => (/* binding */ HANDLE_PLANNER_REQUEST_ERROR)
+/* harmony export */   "HANDLE_PLANNER_REQUEST_ERROR": () => (/* binding */ HANDLE_PLANNER_REQUEST_ERROR),
+/* harmony export */   "START_FRIENDS_REQUEST": () => (/* binding */ START_FRIENDS_REQUEST),
+/* harmony export */   "HANDLE_FRIENDS_REQUEST": () => (/* binding */ HANDLE_FRIENDS_REQUEST),
+/* harmony export */   "HANDLE_FRIENDS_REQUEST_ERROR": () => (/* binding */ HANDLE_FRIENDS_REQUEST_ERROR),
+/* harmony export */   "START_FETCH_PERMISSIONS": () => (/* binding */ START_FETCH_PERMISSIONS),
+/* harmony export */   "HANDLE_FETCH_PERMISSIONS": () => (/* binding */ HANDLE_FETCH_PERMISSIONS),
+/* harmony export */   "HANDLE_FETCH_PERMISSIONS_ERROR": () => (/* binding */ HANDLE_FETCH_PERMISSIONS_ERROR)
 /* harmony export */ });
 var START_CALENDARS_REQUEST = "START_CALENDAR_REQUEST";
 var HANDEL_CALENDARS_REQUEST = "HANDLE_CALENDARS_REQUEST";
@@ -6460,6 +6942,12 @@ var MARK_LOADING_VIEW_CALENDAR_AS_DONE = "MARK_LOADING_VIEW_CALENDAR_AS_DONE";
 var START_PLANNER_REQUEST = "START_PLANNER_REQUEST";
 var HANDLE_PLANNER_REQUEST = "HANDLE_PLANNER_REQUEST";
 var HANDLE_PLANNER_REQUEST_ERROR = "HANDLE_PLANNER_REQUEST_ERROR";
+var START_FRIENDS_REQUEST = "START_FRIENDS_REQUEST";
+var HANDLE_FRIENDS_REQUEST = "HANDLE_FRIENDS_REQUEST";
+var HANDLE_FRIENDS_REQUEST_ERROR = "HANDLE_FRIENDS_REQUEST_ERROR";
+var START_FETCH_PERMISSIONS = "START_FETCH_PERMISSIONS";
+var HANDLE_FETCH_PERMISSIONS = "HANDLE_FETCH_PERMISSIONS";
+var HANDLE_FETCH_PERMISSIONS_ERROR = "HANDLE_FETCH_PERMISSIONS_ERROR";
 
 /***/ }),
 
@@ -6501,8 +6989,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _config_app_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config/app-config */ "./resources/js/user/config/app-config.js");
 /* harmony import */ var _components_AppNavbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/AppNavbar */ "./resources/js/user/components/AppNavbar.jsx");
 /* harmony import */ var _Pages_DashboardPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Pages/DashboardPage */ "./resources/js/user/Pages/DashboardPage.jsx");
@@ -6511,8 +6999,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_ViewCalendar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Pages/ViewCalendar */ "./resources/js/user/Pages/ViewCalendar.jsx");
 /* harmony import */ var _Pages_PlannerPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Pages/PlannerPage */ "./resources/js/user/Pages/PlannerPage.jsx");
 /* harmony import */ var _Pages_ProfilePage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Pages/ProfilePage */ "./resources/js/user/Pages/ProfilePage.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Pages_FriendsPage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Pages/FriendsPage */ "./resources/js/user/Pages/FriendsPage.jsx");
+/* harmony import */ var _store_actions_permissions_actions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../store/actions/permissions-actions */ "./resources/js/store/actions/permissions-actions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+
 
 
 
@@ -6535,33 +7027,44 @@ function App(_ref) {
   var calendarStore = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(function (state) {
     return state.CalendarStore;
   });
+  var permissionsStore = (0,react_redux__WEBPACK_IMPORTED_MODULE_0__.useSelector)(function (state) {
+    return state.PermissionsStore;
+  });
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
     if (calendarStore.status == "idle") {
       dispatch((0,_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_6__.startFetchingCalendars)());
     }
   }, [calendarStore.status]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    if (permissionsStore.status === 'idle') {
+      dispatch((0,_store_actions_permissions_actions__WEBPACK_IMPORTED_MODULE_11__.fetchPermissions)());
+    }
+  }, [permissionsStore.status]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.BrowserRouter, {
       basename: _config_app_config__WEBPACK_IMPORTED_MODULE_2__.default.baseUri,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_AppNavbar__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_AppNavbar__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
         className: "container-fluid bg-white wrapper shadow pb-5",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Switch, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
             path: "/",
             component: _Pages_DashboardPage__WEBPACK_IMPORTED_MODULE_4__.default,
             exact: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
             path: "/calendars",
             component: _Pages_CalendarsPage__WEBPACK_IMPORTED_MODULE_5__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
             path: "/view/:id",
             component: _Pages_ViewCalendar__WEBPACK_IMPORTED_MODULE_7__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
             path: "/planners",
             component: _Pages_PlannerPage__WEBPACK_IMPORTED_MODULE_8__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
             path: "/profile",
             component: _Pages_ProfilePage__WEBPACK_IMPORTED_MODULE_9__.default
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
+            path: "/friends",
+            component: _Pages_FriendsPage__WEBPACK_IMPORTED_MODULE_10__.default
           })]
         })
       })]
@@ -6703,6 +7206,84 @@ function DashboardPage() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashboardPage);
+
+/***/ }),
+
+/***/ "./resources/js/user/Pages/FriendsPage.jsx":
+/*!*************************************************!*\
+  !*** ./resources/js/user/Pages/FriendsPage.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ FriendsPage)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _hooks_useFriendsStore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../hooks/useFriendsStore */ "./resources/js/hooks/useFriendsStore.js");
+/* harmony import */ var _friends_AddFriend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./friends/AddFriend */ "./resources/js/user/Pages/friends/AddFriend.jsx");
+/* harmony import */ var _friends_FriendsHome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./friends/FriendsHome */ "./resources/js/user/Pages/friends/FriendsHome.jsx");
+/* harmony import */ var _friends_FriendsPermissions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./friends/FriendsPermissions */ "./resources/js/user/Pages/friends/FriendsPermissions.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+function FriendsPage() {
+  var _useRouteMatch = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useRouteMatch)(),
+      path = _useRouteMatch.path;
+
+  var friendsStore = (0,_hooks_useFriendsStore__WEBPACK_IMPORTED_MODULE_1__.default)();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "row mx-auto p-2",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "col-lg-2 col-md-3",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "list-group list-group-flush",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+            to: "/friends",
+            className: "list-group-item text-dark nav-link",
+            title: "View all friends list",
+            children: "All Friends"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+            to: "/friends/add",
+            className: "list-group-item text-dark nav-link",
+            title: "add new friend",
+            children: "Add Friend"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+            to: "/friends/permissions",
+            className: "list-group-item text-dark nav-link",
+            title: "assign a role of a friend",
+            children: "Permissions"
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "col-lg-10 col-md-9",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+            path: "".concat(path),
+            exact: true,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_friends_FriendsHome__WEBPACK_IMPORTED_MODULE_3__.default, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+            path: "".concat(path, "/add"),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_friends_AddFriend__WEBPACK_IMPORTED_MODULE_2__.default, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+            path: "".concat(path, "/permissions"),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_friends_FriendsPermissions__WEBPACK_IMPORTED_MODULE_4__.default, {})
+          })]
+        })
+      })]
+    })
+  });
+}
 
 /***/ }),
 
@@ -7405,6 +7986,698 @@ function EditCalendar() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditCalendar);
+
+/***/ }),
+
+/***/ "./resources/js/user/Pages/friends/AddFriend.jsx":
+/*!*******************************************************!*\
+  !*** ./resources/js/user/Pages/friends/AddFriend.jsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_ErrorHandlingComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/ErrorHandlingComponent */ "./resources/js/components/ErrorHandlingComponent.jsx");
+/* harmony import */ var _components_LoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/LoadingComponent */ "./resources/js/components/LoadingComponent.jsx");
+/* harmony import */ var _components_NoDataFound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/NoDataFound */ "./resources/js/components/NoDataFound.jsx");
+/* harmony import */ var _components_SearchBox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/SearchBox */ "./resources/js/components/SearchBox.jsx");
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _components_FriendsListComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/FriendsListComponent */ "./resources/js/user/components/FriendsListComponent.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      searchKeyword = _useState2[0],
+      setSearchKeyword = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      friends = _useState4[0],
+      setFriends = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      error = _useState6[0],
+      setError = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      started = _useState8[0],
+      toggleStarted = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("idle"),
+      _useState10 = _slicedToArray(_useState9, 2),
+      status = _useState10[0],
+      setStatus = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      nextPage = _useState12[0],
+      setNextPage = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState14 = _slicedToArray(_useState13, 2),
+      prevPage = _useState14[0],
+      setPrevPage = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState16 = _slicedToArray(_useState15, 2),
+      fromResult = _useState16[0],
+      setFromResult = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+      _useState18 = _slicedToArray(_useState17, 2),
+      toResult = _useState18[0],
+      setToResult = _useState18[1];
+
+  var startSearch = function startSearch(keyword) {
+    var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+    if (!keyword || keyword === "") {
+      /* Swal.fire({
+        title: "Info",
+        text: "You didn't enter anything",
+        icon: "info",
+        toast: true,
+      }); */
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+        title: "Warning",
+        text: "you didn\'t enter anything",
+        icon: "warning",
+        toast: true,
+        confirmButtonText: "<span class=\"fa fa-check\"></span> okay, let me try again",
+        confirmButtonColor: "#32b9e4"
+      });
+      return;
+    }
+
+    setSearchKeyword(keyword);
+    toggleStarted(true);
+    setStatus("loading");
+
+    if (!url) {
+      url = _constant_api_scheme__WEBPACK_IMPORTED_MODULE_6__.default.friendsSearch;
+    }
+
+    _service_http_service__WEBPACK_IMPORTED_MODULE_7__.default.post(url, {
+      keyword: keyword
+    }).then(function (_ref) {
+      var data = _ref.data;
+      setStatus("succeeded");
+      setFriends(data.data);
+      setNextPage(data.links.next);
+      setPrevPage(data.links.prev);
+      setFromResult(data.meta.from);
+      setToResult(data.meta.to);
+    })["catch"](function (err) {
+      console.log(err);
+      setStatus("failed");
+
+      if (err.response && err.response.status === 422) {
+        setError("Missing keyword");
+      } else {
+        setError("Unable to handle this request");
+      }
+    });
+  };
+
+  var onListUpdate = function onListUpdate() {
+    startSearch(searchKeyword);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+    className: "p-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+      className: "row mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_SearchBox__WEBPACK_IMPORTED_MODULE_5__.default, {
+        autoSearch: false,
+        onSearch: startSearch,
+        placeholder: "Enter friend name or email"
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+      children: !started ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+        className: "p-5 text-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+          className: "fa fa-check-circle fa-3x text-primary"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+          className: "my-2",
+          children: "Enter friend E-mail or Name and then click search"
+        })]
+      }) : friends.length && started ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+          className: "my-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("p", {
+            className: "mb-1",
+            children: ["show results from ", fromResult, " to ", toResult]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+            className: "btn-group",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+              className: "btn btn-light border",
+              disabled: !prevPage,
+              onClick: function onClick(e) {
+                return startSearch(searchKeyword, prevPage);
+              },
+              children: "Prev"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("button", {
+              className: "btn btn-light border",
+              disabled: !nextPage,
+              onClick: function onClick(e) {
+                return startSearch(searchKeyword, nextPage);
+              },
+              children: "Next"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_FriendsListComponent__WEBPACK_IMPORTED_MODULE_8__.default, {
+          friends: friends,
+          onListUpdate: onListUpdate
+        })]
+      }) : status === "succeeded" && !friends.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_NoDataFound__WEBPACK_IMPORTED_MODULE_4__.default, {}) : status === "failed" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_ErrorHandlingComponent__WEBPACK_IMPORTED_MODULE_2__.default, {
+        text: error
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_LoadingComponent__WEBPACK_IMPORTED_MODULE_3__.default, {})
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/user/Pages/friends/FriendsHome.jsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/user/Pages/friends/FriendsHome.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_ErrorHandlingComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/ErrorHandlingComponent */ "./resources/js/components/ErrorHandlingComponent.jsx");
+/* harmony import */ var _components_LoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/LoadingComponent */ "./resources/js/components/LoadingComponent.jsx");
+/* harmony import */ var _components_NoDataFound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/NoDataFound */ "./resources/js/components/NoDataFound.jsx");
+/* harmony import */ var _components_SearchBox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/SearchBox */ "./resources/js/components/SearchBox.jsx");
+/* harmony import */ var _helpers_friends_helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../helpers/friends-helper */ "./resources/js/helpers/friends-helper.js");
+/* harmony import */ var _store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../store/actions/friends-actions */ "./resources/js/store/actions/friends-actions.js");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../utils/utils */ "./resources/js/utils/utils.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+/* import Swal from "sweetalert2"; */
+
+
+
+
+
+/* import apiScheme from "../../../constant/api-scheme"; */
+
+
+/* import HttpService from "../../../service/http-service"; */
+
+
+
+
+
+
+
+function FriendsHome() {
+  var friends = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.FriendsStore;
+  });
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  var onSearch = function onSearch(keyword) {
+    console.log(keyword);
+  };
+
+  var removeFriend = function removeFriend(friend) {
+    /* window.event.preventDefault();
+    HttpService.delete(apiScheme.friends+`/${friend.relation_id}`)
+    .then(({data}) => {
+      Swal.fire({
+        title: "Success",
+        text: 'Action completed',
+        icon: "success",
+        toast: true,
+        timer: 2000,
+        timerProgressBar: true
+      })
+      dispatch(fetchFriends());
+    }).catch(err => {
+      console.log(err)
+    }); */
+    (0,_helpers_friends_helper__WEBPACK_IMPORTED_MODULE_6__.removeFromFriendList)(friend.relation_id).then(function () {
+      return dispatch((0,_store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_7__.fetchFriends)());
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+    className: "p-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+      className: "row mx-auto",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_SearchBox__WEBPACK_IMPORTED_MODULE_5__.default, {
+        placeholder: "search friends ...",
+        onSearch: onSearch,
+        autoSearch: true,
+        className: "col"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("button", {
+        className: "btn btn-sm btn-primary",
+        onClick: function onClick(e) {
+          return dispatch((0,_store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_7__.fetchFriends)());
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+          className: "fa fa-sync-alt mr-1"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+          children: "refresh"
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("hr", {}), friends.data.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+      children: friends.data.map(function (friend) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+          className: "row mx-auto pb-3 my-2 border-bottom align-items-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+            className: "col-1",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
+              src: friend.image ? (0,_utils_utils__WEBPACK_IMPORTED_MODULE_8__.profileImage)(friend.image.url) : (0,_utils_utils__WEBPACK_IMPORTED_MODULE_8__.defaultProfileImage)(),
+              alt: "".concat(friend.name, " profile picture"),
+              className: "img-fluid rounded"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+            className: "col",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+              className: "mb-0",
+              children: friend.name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+              className: "mb-0 text-muted small",
+              children: friend.email
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("a", {
+                href: "",
+                className: "badge badge-primary mr-1",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                  className: "fa fa-book mr-1"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                  children: "View"
+                })]
+              }), friend.accepted ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("a", {
+                  href: "",
+                  className: "badge badge-danger",
+                  onClick: function onClick(e) {
+                    return removeFriend(friend);
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                    className: "fa fa-user-slash mr-1"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                    children: "Unfriend"
+                  })]
+                })
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("a", {
+                  href: "",
+                  className: "badge badge-secondary",
+                  onClick: function onClick(e) {
+                    return removeFriend(friend);
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                    className: "fa fa-times mr-1"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                    children: "Cancel friend request"
+                  })]
+                })
+              })]
+            })]
+          })]
+        }, friend.id);
+      })
+    }) : friends.status === "succeeded" && !friends.data.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_NoDataFound__WEBPACK_IMPORTED_MODULE_4__.default, {
+        text: "No Friends found"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        className: "text-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Link, {
+          to: "/friends/add",
+          className: "btn btn-primary",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+            className: "fa fa-plus-circle mr-1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+            children: "Add a friend"
+          })]
+        })
+      })]
+    }) : friends.status === "failed" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_ErrorHandlingComponent__WEBPACK_IMPORTED_MODULE_2__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_LoadingComponent__WEBPACK_IMPORTED_MODULE_3__.default, {})]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FriendsHome);
+
+/***/ }),
+
+/***/ "./resources/js/user/Pages/friends/FriendsPermissions.jsx":
+/*!****************************************************************!*\
+  !*** ./resources/js/user/Pages/friends/FriendsPermissions.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_ErrorHandlingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/ErrorHandlingComponent */ "./resources/js/components/ErrorHandlingComponent.jsx");
+/* harmony import */ var _components_LoadingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/LoadingComponent */ "./resources/js/components/LoadingComponent.jsx");
+/* harmony import */ var _components_NoDataFound__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/NoDataFound */ "./resources/js/components/NoDataFound.jsx");
+/* harmony import */ var _components_SearchBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/SearchBox */ "./resources/js/components/SearchBox.jsx");
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _store_actions_permissions_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../store/actions/permissions-actions */ "./resources/js/store/actions/permissions-actions.js");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../utils/utils */ "./resources/js/utils/utils.js");
+/* harmony import */ var _components_PermissionModal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/PermissionModal */ "./resources/js/user/components/PermissionModal.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var role = {
+  calendar_id: "",
+  user_id: "",
+  can_read: false,
+  can_create: false,
+  can_edit: false,
+  can_delete: false,
+  can_restore: false
+};
+
+function FriendsPermissions() {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      permissions = _React$useState2[0],
+      setPermissions = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState(role),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      permission = _React$useState4[0],
+      setPermission = _React$useState4[1];
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      showModal = _React$useState6[0],
+      toggleModal = _React$useState6[1];
+
+  var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0__.useState("create"),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      modalMode = _React$useState8[0],
+      setModalMode = _React$useState8[1];
+
+  var permissionsStore = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.PermissionsStore;
+  });
+
+  var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0__.useState(null),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      searchKeyword = _React$useState10[0],
+      setSearchKeyword = _React$useState10[1];
+
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  function getFriendsPermissions() {
+    var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+    if (permissionsStore.status === "idle" || force) {
+      dispatch((0,_store_actions_permissions_actions__WEBPACK_IMPORTED_MODULE_9__.fetchPermissions)());
+    }
+
+    var friendsPermissions = permissionsStore.friendsPermissions;
+    setPermissions(friendsPermissions);
+  }
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(getFriendsPermissions, [permissionsStore.status]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var $permissions = permissions;
+
+    if (searchKeyword && searchKeyword.trim() !== "") {
+      $permissions = $permissions.filter(function (permission) {
+        return permission.user.name.toLowerCase().includes(searchKeyword.toLowerCase()) || permission.calendar.title.toLowerCase().includes(searchKeyword.toLowerCase());
+      });
+      setPermissions($permissions);
+    } else {
+      setPermissions(permissionsStore.friendsPermissions);
+    }
+  }, [searchKeyword]);
+
+  var handleSearch = function handleSearch(keyword) {
+    setSearchKeyword(keyword);
+  };
+
+  var openCreateModal = function openCreateModal() {
+    setPermission(role);
+    setModalMode("create");
+    toggleModal(true);
+  };
+
+  var openEditModal = function openEditModal($permission) {
+    setPermission($permission);
+    setModalMode("edit");
+    toggleModal(true);
+  };
+
+  var deletePermission = function deletePermission(permission) {
+    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+      title: "Warning",
+      html: "<span class=\"small\">Are you sure, you want to delete <b>".concat(permission.user.name, "</b> permissions on\n          <b>").concat(permission.calendar.title, "</b> calendar</span>\n        "),
+      icon: "warning",
+      toast: true,
+      showCancelButton: true,
+      confirmButtonText: "<span class=\"fa fa-trash\"></span> Yes",
+      cancelButtonText: "<span class=\"fa fa-times\"></span> No"
+    }).then(function (res) {
+      if (res.isConfirmed) {
+        _service_http_service__WEBPACK_IMPORTED_MODULE_8__.default.delete(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_7__.default.permission.calendars + "/".concat(permission.id)).then(function (_ref) {
+          var data = _ref.data;
+          sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+            title: "success",
+            html: "Permissions of <b>".concat(permission.user.name, "</b> on\n            <b>").concat(permission.calendar.title, "</b> calendar has been canceled\n          "),
+            toast: true,
+            icon: "success",
+            timer: 2000,
+            timerProgressBar: true
+          });
+          getFriendsPermissions(true);
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+    className: "p-2",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("p", {
+      className: "lead",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("img", {
+        src: (0,_utils_utils__WEBPACK_IMPORTED_MODULE_10__.imgUrl)("permission.png"),
+        alt: "Permission icon",
+        className: "icon-img mr-1"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+        children: "Friends Permissions"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+        className: "row mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_SearchBox__WEBPACK_IMPORTED_MODULE_6__.default, {
+          onSearch: handleSearch,
+          placeholder: "Search friends permissions"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("button", {
+          className: "btn btn-sm btn-primary",
+          onClick: function onClick(e) {
+            return getFriendsPermissions(true);
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+            className: "fa fa-sync mr-1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+            children: "refresh"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("button", {
+          className: "btn btn-sm btn-success mx-1",
+          onClick: openCreateModal,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+            className: "fa fa-plus mr-1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+            children: "add permission"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+        className: "my-2",
+        children: permissions.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("table", {
+            className: "table table-sm small table-striped",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("thead", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("tr", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Actions"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Permission ID"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "User"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Calendar"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Can Read"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Can Create"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Can Edit"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Can Delete"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                  children: "Can Restore"
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("tbody", {
+              children: permissions.map(function (permission) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("tr", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("td", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("button", {
+                      className: "btn btn-sm btn-warning mr-1",
+                      onClick: function onClick(e) {
+                        return openEditModal(permission);
+                      },
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                        className: "far fa-edit"
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("button", {
+                      className: "btn btn-sm btn-danger",
+                      onClick: function onClick(e) {
+                        return deletePermission(permission);
+                      },
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                        className: "fa fa-trash"
+                      })
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: permission.id
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("td", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("img", {
+                      src: permission.user.image ? (0,_utils_utils__WEBPACK_IMPORTED_MODULE_10__.profileImage)(permission.user.image.url) : (0,_utils_utils__WEBPACK_IMPORTED_MODULE_10__.defaultProfileImage)(),
+                      alt: "",
+                      className: "icon-img-sm"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      children: permission.user.name
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: permission.calendar.title
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: permission.can_read ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-check text-success"
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-times text-danger"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: permission.can_create ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-check text-success"
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-times text-danger"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: permission.can_edit ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-check text-success"
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-times text-danger"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: permission.can_delete ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-check text-success"
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-times text-danger"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: permission.can_restore ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-check text-success"
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                      className: "fa fa-times text-danger"
+                    })
+                  })]
+                }, permission.id);
+              })
+            })]
+          })
+        }) : permissionsStore.status === "succeeded" && !permissions.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_NoDataFound__WEBPACK_IMPORTED_MODULE_5__.default, {}) : permissionsStore.status === "failed" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_ErrorHandlingComponent__WEBPACK_IMPORTED_MODULE_3__.default, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_LoadingComponent__WEBPACK_IMPORTED_MODULE_4__.default, {})
+      })]
+    }), showModal && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_PermissionModal__WEBPACK_IMPORTED_MODULE_11__.default, {
+      role: permission,
+      show: showModal,
+      mode: modalMode,
+      onClose: function onClose(e) {
+        return toggleModal(false);
+      },
+      actionCallback: function actionCallback(e) {
+        return getFriendsPermissions(true);
+      }
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FriendsPermissions);
 
 /***/ }),
 
@@ -8965,7 +10238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _constant_app_navbar_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constant/app-navbar-menu */ "./resources/js/user/constant/app-navbar-menu.js");
 /* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/utils */ "./resources/js/utils/utils.js");
-/* harmony import */ var _components_UserProfilePictureComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/UserProfilePictureComponent */ "./resources/js/components/UserProfilePictureComponent.jsx");
+/* harmony import */ var _NavbarFriendRequests__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NavbarFriendRequests */ "./resources/js/user/components/NavbarFriendRequests.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -9026,8 +10299,8 @@ function AppNavbar() {
                 })]
               })
             }, "navbar_item_".concat(itemIndex));
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("li", {
-            className: "nav-item dropdown dropleft",
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NavbarFriendRequests__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("li", {
+            className: "nav-item dropleft",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
               href: "",
               className: "nav-link text-white dropdown-toggle",
@@ -9046,7 +10319,7 @@ function AppNavbar() {
               className: "dropdown-menu dropdown-menu-left",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
                 to: "/profile",
-                className: "dropdown-item",
+                className: "dropdown-item small",
                 title: "view user profile data",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
                   src: (0,_utils_utils__WEBPACK_IMPORTED_MODULE_3__.imgUrl)("user-default.png"),
@@ -9130,6 +10403,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var CalendarListItem = function CalendarListItem(_ref) {
   var calendar = _ref.calendar,
       deleteCalendar = _ref.deleteCalendar;
@@ -9153,51 +10427,91 @@ var CalendarListItem = function CalendarListItem(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
     className: "border-bottom my-2 d-md-flex justify-content-between align-items-center",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
-        to: "/view/".concat(calendar.id),
-        className: "text-decoration-none",
-        title: "View calendar ".concat(calendar.title),
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
-          className: "mb-1",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-            className: "mr-1",
-            children: calendar.title
-          })
+      className: "d-flex align-items-center pb-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+        className: "mr-2",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("img", {
+          src: (0,_utils_utils__WEBPACK_IMPORTED_MODULE_7__.imgUrl)("calendar.png"),
+          alt: "",
+          className: "icon-img-xl"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
-        className: "text-muted small mb-2",
-        children: calendar.desc || "No description"
-      })]
-    }), canEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-      className: "float-right btn-group btn-group-sm mb-2",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
-        to: "/planners?calendar_id=".concat(calendar.id),
-        className: "btn btn-sm btn-secondary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-          className: "far fa-calendar-check mr-1"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-          children: "Planners"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
-        to: "/calendars/edit/".concat(calendar.id),
-        className: "btn btn-sm btn-secondary",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-          className: "far fa-edit mx-1"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-          children: "edit"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("a", {
-        href: "/",
-        className: "btn btn-sm btn-secondary",
-        onClick: function onClick(e) {
-          return deleteCalendar(calendar);
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-          className: "fa fa-trash mx-1"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-          children: "delete"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+        className: "",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
+          to: "/view/".concat(calendar.id),
+          className: "text-decoration-none",
+          title: "View calendar ".concat(calendar.title),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+            className: "mb-1 font-weight-bold",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              className: "mr-1",
+              children: calendar.title
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+          className: "text-muted small mb-0",
+          children: calendar.desc || "No description"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+          className: "small mb-0",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+            children: calendar.user.name
+          })
         })]
       })]
+    }), canEdit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+        className: "dropdown dropleft",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("a", {
+          href: "",
+          className: "dropdown-toggle text-dark",
+          "data-toggle": "dropdown",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+            className: "fa fa-wrench mr-1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+            children: "Action"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+          className: "dropdown-menu",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
+            to: "/calendars/setting/".concat(calendar.id),
+            className: "dropdown-item small",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              className: "fa fa-cog mr-1"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              children: "Settings"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
+            to: "/planners?calendar_id=".concat(calendar.id),
+            className: "dropdown-item small",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              className: "far fa-calendar-check mr-1 text-info"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              children: "Planners"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
+            to: "/calendars/edit/".concat(calendar.id),
+            className: "dropdown-item small",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              className: "far fa-edit mr-1 text-success"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              children: "Edit"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            className: "dropdown-divider"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("a", {
+            href: "/",
+            className: "dropdown-item small",
+            onClick: function onClick(e) {
+              return deleteCalendar(calendar);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              className: "fa fa-trash mr-1 text-danger"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+              children: "Delete"
+            })]
+          })]
+        })]
+      })
     })]
   });
 };
@@ -9240,7 +10554,7 @@ function CalendarsList() {
     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
       title: "Warning",
       icon: "warning",
-      html: "<span class=\"small\">Are you sure, you want to delete <b class=\"text-danger\">".concat(calendar.title, "<b> calendar</span>"),
+      html: "<span class=\"small\">\n      Are you sure, you want to delete <b class=\"text-danger\">".concat(calendar.title, "</b> calendar\n      </span>"),
       showCancelButton: true,
       cancelButtonText: "Keep",
       confirmButtonText: "<span class=\"fa fa-trash\"></span> Yes, delete",
@@ -9919,6 +11233,611 @@ EditPlannerEventModal.propTypes = {
 
 /***/ }),
 
+/***/ "./resources/js/user/components/FriendsListComponent.jsx":
+/*!***************************************************************!*\
+  !*** ./resources/js/user/components/FriendsListComponent.jsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/utils */ "./resources/js/utils/utils.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _helpers_friends_helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helpers/friends-helper */ "./resources/js/helpers/friends-helper.js");
+/* harmony import */ var _store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../store/actions/friends-actions */ "./resources/js/store/actions/friends-actions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+function FriendsListComponent(_ref) {
+  var friends = _ref.friends,
+      onListUpdate = _ref.onListUpdate;
+  var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
+    return state.UserStore.data;
+  });
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
+
+  var addFriend = function addFriend(friend) {
+    window.event.preventDefault();
+    _service_http_service__WEBPACK_IMPORTED_MODULE_4__.default.post(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_5__.default.friends, {
+      friend_id: friend.id
+    }).then(function (_ref2) {
+      var data = _ref2.data;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_6___default().fire({
+        title: "Success",
+        text: "Request Sent",
+        icon: "success",
+        toast: true,
+        timer: 2000,
+        timerProgressBar: true
+      });
+      onListUpdate();
+      dispatch((0,_store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_8__.fetchFriends)());
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+  /* const isFriend = (friend) => {
+    let is_a_friend = false;
+    if (!friend.friends.length) {
+      return is_a_friend;
+    }
+    friend.friends.map((item) => {
+      if (item.user_id === user.id || item.friend_id === user.id) {
+        is_a_friend = true;
+      }
+    });
+    return is_a_friend;
+  }; */
+
+
+  var isFriend = _helpers_friends_helper__WEBPACK_IMPORTED_MODULE_7__.isAFriend;
+  /*  const isFriendShipAccepted = (friend) => {
+     return friend.friends[0].accepted === 1;
+   }; */
+
+  var deleteFriend = function deleteFriend(friend) {
+    window.event.preventDefault();
+    (0,_helpers_friends_helper__WEBPACK_IMPORTED_MODULE_7__.removeFromFriendList)(friend.friends[0].id).then(function () {
+      onListUpdate();
+      dispatch((0,_store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_8__.fetchFriends)());
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  };
+
+  var isFriendShipAccepted = _helpers_friends_helper__WEBPACK_IMPORTED_MODULE_7__.IsFriendshipAccepted;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+    children: friends.map(function (friend) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+        className: "row mx-auto pb-3 align-items-center border-bottom",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+          className: "col-1",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
+            src: friend.image ? (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.profileImage)(friend.image.url) : (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.defaultProfileImage)(),
+            alt: "".concat(friend.name, " profile picture"),
+            className: "img-fluid rounded"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+          className: "col",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+            className: "mb-0 lead",
+            children: friend.name
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+            className: "mb-0 small text-muted",
+            children: friend.email
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+            className: "my-2",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("a", {
+              href: "",
+              className: "badge badge-primary mr-1",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                className: "fa fa-book mr-1"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                children: "View"
+              })]
+            }), isFriend(friend) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+              children: isFriendShipAccepted(friend) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("a", {
+                href: "",
+                className: "badge badge-danger",
+                onClick: function onClick(e) {
+                  return deleteFriend(friend);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                  className: "fa fa-user-slash mr-1"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                  children: "Unfriend"
+                })]
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("a", {
+                href: "",
+                className: "badge badge-secondary border",
+                onClick: function onClick(e) {
+                  return deleteFriend(friend);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                  className: "fa fa-times mr-1"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                  children: "Cancel friend request"
+                })]
+              })
+            }) : user.id !== friend.id ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("a", {
+              href: "",
+              className: "badge badge-primary",
+              onClick: function onClick(e) {
+                return addFriend(friend);
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                className: "fa fa-plus mr-1"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+                children: "Add"
+              })]
+            }) : null]
+          })]
+        })]
+      }, friend.id);
+    })
+  });
+}
+
+FriendsListComponent.propTypes = {
+  friends: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().array.isRequired),
+  onListUpdate: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func)
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FriendsListComponent);
+
+/***/ }),
+
+/***/ "./resources/js/user/components/NavbarFriendRequests.jsx":
+/*!***************************************************************!*\
+  !*** ./resources/js/user/components/NavbarFriendRequests.jsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store/actions/friends-actions */ "./resources/js/store/actions/friends-actions.js");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/utils */ "./resources/js/utils/utils.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+function NavbarFriendRequests() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      requests = _useState2[0],
+      setRequest = _useState2[1];
+
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  var getRequests = function getRequests() {
+    _service_http_service__WEBPACK_IMPORTED_MODULE_4__.default.get(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_3__.default.friendRequests).then(function (_ref) {
+      var data = _ref.data;
+      setRequest(data.data);
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(getRequests, []);
+
+  var handleRequest = function handleRequest(request, type) {
+    var query = {
+      type: type,
+      id: request.id
+    };
+    _service_http_service__WEBPACK_IMPORTED_MODULE_4__.default.put(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_3__.default.friends + "/".concat(request.relation_id), query).then(function (_ref2) {
+      var data = _ref2.data;
+      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+        title: 'Success',
+        text: data.message,
+        icon: 'success',
+        toast: true,
+        timer: 3000,
+        timerProgressBar: true
+      });
+      getRequests();
+      dispatch((0,_store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_5__.fetchFriends)());
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("li", {
+    className: "nav-item dropleft",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("a", {
+      href: "",
+      className: "nav-link dropdown-toggle text-white",
+      "data-toggle": "dropdown",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+        className: "fa fa-bell mr-1"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+        children: requests.length
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      className: "dropdown-menu",
+      children: requests.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+        children: requests.map(function (request) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "dropdown-item border-bottom small",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+              to: "/",
+              className: "text-decoration-none text-dark",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                src: request.image ? (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.profileImage)(request.image.url) : (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.defaultProfileImage)(),
+                alt: "".concat(request.name, " profile picture"),
+                className: "icon-img rounded-circle img-fluid"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                className: "ml-1",
+                children: request.name
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              className: "my-2 text-center",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
+                className: "btn btn-sm btn-success mr-1",
+                type: "button",
+                onClick: function onClick(e) {
+                  return handleRequest(request, true);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  className: "fa fa-check mr-1"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  children: "confirm"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
+                className: "btn btn-sm btn-danger",
+                type: "button",
+                onClick: function onClick(e) {
+                  return handleRequest(request, false);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  className: "fa fa-times mr-1"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  children: "deny"
+                })]
+              })]
+            })]
+          }, request.id);
+        })
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("span", {
+        className: "dropdown-item-text small",
+        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+          className: "fa fa-sync",
+          style: {
+            cursor: 'pointer'
+          },
+          onClick: getRequests
+        }), " No waiting friend requests"]
+      })
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavbarFriendRequests);
+
+/***/ }),
+
+/***/ "./resources/js/user/components/PermissionModal.jsx":
+/*!**********************************************************!*\
+  !*** ./resources/js/user/components/PermissionModal.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_ModalComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/ModalComponent */ "./resources/js/components/ModalComponent.jsx");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../store/actions/friends-actions */ "./resources/js/store/actions/friends-actions.js");
+/* harmony import */ var _store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../store/actions/calendar-actions */ "./resources/js/store/actions/calendar-actions.js");
+/* harmony import */ var _service_http_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../service/http-service */ "./resources/js/service/http-service.js");
+/* harmony import */ var _constant_api_scheme__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../constant/api-scheme */ "./resources/js/constant/api-scheme.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function PermissionModal(_ref) {
+  var show = _ref.show,
+      _onClose = _ref.onClose,
+      role = _ref.role,
+      actionCallback = _ref.actionCallback,
+      mode = _ref.mode;
+  var friendsStore = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(function (state) {
+    return state.FriendsStore;
+  });
+  var calendarStore = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(function (state) {
+    return state.CalendarStore;
+  });
+  var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(function (state) {
+    return state.UserStore.data;
+  });
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      calendars = _useState2[0],
+      setCalendars = _useState2[1];
+
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useDispatch)();
+  var formik = (0,formik__WEBPACK_IMPORTED_MODULE_3__.useFormik)({
+    initialValues: role,
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_4__.object({
+      calendar_id: yup__WEBPACK_IMPORTED_MODULE_4__.number().required(),
+      user_id: yup__WEBPACK_IMPORTED_MODULE_4__.number().required()
+    }),
+    onSubmit: function onSubmit(values) {
+      console.log(values);
+      var url = _constant_api_scheme__WEBPACK_IMPORTED_MODULE_9__.default.permission.calendars;
+      var method = 'post';
+
+      if (mode === "edit") {
+        url = url + "/".concat(role.id);
+        method = 'put';
+      }
+
+      _service_http_service__WEBPACK_IMPORTED_MODULE_8__.default[method](url, values).then(function (_ref2) {
+        var data = _ref2.data;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_10___default().fire({
+          title: "Success",
+          text: "action completed",
+          icon: "success",
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true
+        });
+        actionCallback();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (friendsStore.status === "idle") {
+      dispatch((0,_store_actions_friends_actions__WEBPACK_IMPORTED_MODULE_6__.fetchFriends)());
+    }
+  }, [friendsStore.status]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (calendarStore.status === "idle") {
+      dispatch((0,_store_actions_calendar_actions__WEBPACK_IMPORTED_MODULE_7__.startFetchingCalendars)());
+    }
+
+    var $cal = calendarStore.data.filter(function (cal) {
+      return cal.user.id === user.id;
+    });
+    setCalendars($cal);
+  }, [calendarStore.status]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_ModalComponent__WEBPACK_IMPORTED_MODULE_2__.default, {
+      show: show,
+      onClose: function onClose(e) {
+        return _onClose();
+      },
+      id: "permission_modal",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("form", {
+        onSubmit: formik.handleSubmit,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+          className: "row mx-auto px-0 mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "col px-0",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+              htmlFor: "",
+              children: "Calendar"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("select", {
+              name: "calendar_id",
+              id: "calendar_id",
+              value: formik.values.calendar_id,
+              onChange: formik.handleChange,
+              className: "form-control form-control-sm ".concat(formik.errors.calendar_id && formik.touched.calendar_id ? "border border-danger" : ""),
+              disabled: mode === "edit",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
+                value: "",
+                children: "Select Calendar"
+              }), calendars.map(function (calendar) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
+                  value: calendar.id,
+                  children: calendar.title
+                }, calendar.id);
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            className: "col",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+              htmlFor: "",
+              children: "Friends"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("select", {
+              name: "user_id",
+              id: "user_id",
+              defaultValue: formik.values.user_id,
+              onChange: formik.handleChange,
+              className: "form-control form-control-sm ".concat(formik.errors.user_id && formik.touched.user_id ? "border border-danger" : ""),
+              disabled: mode === "edit",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
+                value: "",
+                children: "Select Friend"
+              }), friendsStore.data.map(function (friend) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("option", {
+                  value: friend.id,
+                  children: friend.name
+                }, friend.id);
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+          className: "form-group",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+            htmlFor: "",
+            children: "Permissions"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+              type: "checkbox",
+              value: formik.can_read,
+              onChange: formik.handleChange,
+              name: "can_read",
+              checked: formik.values.can_read
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+              htmlFor: "",
+              className: "ml-1 small form-check-inline",
+              children: "can read"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+              type: "checkbox",
+              value: formik.values.can_create,
+              onChange: formik.handleChange,
+              name: "can_create",
+              checked: formik.values.can_create
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+              htmlFor: "",
+              className: "ml-1 small form-check-inline",
+              children: "can create"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+              type: "checkbox",
+              value: formik.can_edit,
+              onChange: formik.handleChange,
+              name: "can_edit",
+              checked: formik.values.can_edit
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+              htmlFor: "",
+              className: "ml-1 small form-check-inline",
+              children: "can edit"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+              type: "checkbox",
+              value: formik.can_delete,
+              onChange: formik.handleChange,
+              name: "can_delete",
+              checked: formik.values.can_delete
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+              htmlFor: "",
+              className: "ml-1 small form-check-inline",
+              children: "can delete"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("input", {
+              type: "checkbox",
+              value: formik.can_restore,
+              onChange: formik.handleChange,
+              name: "can_restore",
+              checked: formik.values.can_restore
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("label", {
+              htmlFor: "",
+              className: "ml-1 small form-check-inline",
+              children: "can restore"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+          className: "form-group text-right",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("button", {
+            className: "btn btn-sm btn-secondary",
+            "data-dismiss": "modal",
+            type: "button",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+              className: "fa fa-times mr-1"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+              children: "close"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("button", {
+            className: "btn btn-sm btn-success mx-1",
+            type: "submit",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+              className: mode === 'create' ? "fa fa-plus mr-1" : "fa fa-save mr-1"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
+              children: mode === "create" ? 'add' : 'update'
+            })]
+          })]
+        })]
+      })
+    })
+  });
+}
+
+PermissionModal.propTypes = {
+  show: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().bool.isRequired),
+  onClose: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func.isRequired),
+  role: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().object),
+  mode: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string.isRequired),
+  actionCallback: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func)
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PermissionModal);
+
+/***/ }),
+
 /***/ "./resources/js/user/components/PlannerListComponent.jsx":
 /*!***************************************************************!*\
   !*** ./resources/js/user/components/PlannerListComponent.jsx ***!
@@ -9957,15 +11876,17 @@ var PlannerListComponentItem = function PlannerListComponentItem(_ref) {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useDispatch)();
 
   var deletePlanner = function deletePlanner(planner) {
+    console.log(planner);
     window.event.preventDefault();
     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
       title: "Warning",
-      html: "Are you sure, you want to delete planner ".concat(planner.name, "?"),
+      html: "Are you sure, you want to delete planner <b class=\"text-danger\">".concat(planner.title, "</b> ?"),
       icon: "success",
       showCancelButton: true,
       confirmButtonText: "<span class=\"fa fa-trash\"></span> Yes, Delete",
       confirmButtonColor: '#ec5151',
-      cancelButtonText: "<span class=\"fa fa-times\"></span> Keep"
+      cancelButtonText: "<span class=\"fa fa-times\"></span> Keep",
+      toast: true
     }).then(function (res) {
       if (res.isConfirmed) {
         _service_http_service__WEBPACK_IMPORTED_MODULE_3__.default.delete("".concat(_constant_api_scheme__WEBPACK_IMPORTED_MODULE_4__.default.planners, "/").concat(planner.id)).then(function (_ref2) {
@@ -10123,8 +12044,8 @@ __webpack_require__.r(__webpack_exports__);
   path: "/planners",
   label: "All user planners"
 }, {
-  title: "Team",
-  path: "/team",
+  title: "Friends",
+  path: "/friends",
   label: "All user team mate"
 }]);
 
@@ -10162,21 +12083,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _store_reducers_calendar_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/reducers/calendar-reducer */ "./resources/js/store/reducers/calendar-reducer.js");
-/* harmony import */ var _store_reducers_planner_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/reducers/planner-reducer */ "./resources/js/store/reducers/planner-reducer.js");
-/* harmony import */ var _store_reducers_user_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/reducers/user-reducer */ "./resources/js/store/reducers/user-reducer.js");
-/* harmony import */ var _store_reducers_view_calendar_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/reducers/view-calendar-reducer */ "./resources/js/store/reducers/view-calendar-reducer.js");
+/* harmony import */ var _store_reducers_friends_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/reducers/friends-reducer */ "./resources/js/store/reducers/friends-reducer.js");
+/* harmony import */ var _store_reducers_permissions_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/reducers/permissions-reducer */ "./resources/js/store/reducers/permissions-reducer.js");
+/* harmony import */ var _store_reducers_planner_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/reducers/planner-reducer */ "./resources/js/store/reducers/planner-reducer.js");
+/* harmony import */ var _store_reducers_user_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store/reducers/user-reducer */ "./resources/js/store/reducers/user-reducer.js");
+/* harmony import */ var _store_reducers_view_calendar_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../store/reducers/view-calendar-reducer */ "./resources/js/store/reducers/view-calendar-reducer.js");
 
 
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
-  UserStore: _store_reducers_user_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
+  UserStore: _store_reducers_user_reducer__WEBPACK_IMPORTED_MODULE_4__.default,
   CalendarStore: _store_reducers_calendar_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  ViewCalendarStore: _store_reducers_view_calendar_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
-  PlannerStore: _store_reducers_planner_reducer__WEBPACK_IMPORTED_MODULE_1__.default
+  ViewCalendarStore: _store_reducers_view_calendar_reducer__WEBPACK_IMPORTED_MODULE_5__.default,
+  PlannerStore: _store_reducers_planner_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
+  FriendsStore: _store_reducers_friends_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  PermissionsStore: _store_reducers_permissions_reducer__WEBPACK_IMPORTED_MODULE_2__.default
 }));
 
 /***/ }),

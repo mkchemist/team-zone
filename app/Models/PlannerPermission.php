@@ -8,4 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class PlannerPermission extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+      'owner_id',
+      'user_id',
+      'calendar_id',
+      'can_read',
+      'can_create',
+      'can_edit',
+      'can_delete',
+      'can_restore',
+    ];
+
+    public function planner()
+    {
+      return $this->belongsTo(\App\Models\Planner::class);
+    }
+
+    public function owner()
+    {
+      return $this->belongsTo(\App\Models\User::class, 'owner_id');
+    }
+
+    public function user()
+    {
+      return $this->belongsTo(\App\Models\User::class);
+    }
 }

@@ -1,8 +1,15 @@
 export default {
   calendars: "v1/calendars",
   planners: "v1/planners",
-  events: 'v1/events',
+  events: "v1/events",
   profile: {
-    picture: 'v1/user/picture'
+    picture: "v1/user/picture",
+  },
+  friends: "v1/user/friends",
+  friendsSearch: "v1/search/friends",
+  friendRequests: "v1/user/friend-requests",
+  permission: {
+    calendars: 'v1/user/permissions/calendars',
+    planners: 'v1/user/permissions/planners'
   }
-}
+};

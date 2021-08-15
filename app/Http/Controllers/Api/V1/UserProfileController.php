@@ -30,7 +30,7 @@ class UserProfileController extends Controller
       try {
         // check if user already has a profile picture
         // and remove it if exists
-        if($user->image) {
+        if($user->image && file_exists("images/users/{$user->image->url}")) {
           unlink("images/users/{$user->image->url}");
         }
 

@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\V1\CalendarController;
+use App\Http\Controllers\Api\V1\CalendarPermissionController;
+use App\Http\Controllers\Api\V1\FriendController;
 use App\Http\Controllers\Api\V1\PlannerController;
 use App\Http\Controllers\Api\V1\PlannerEventController;
+use App\Http\Controllers\Api\V1\PlannerPermissionController;
 use App\Http\Controllers\Api\V1\UserProfileController;
 use App\Http\Controllers\Api\V1\ViewCalendarController;
 use App\Http\Controllers\LoginController;
@@ -43,10 +46,26 @@ Route::group(["middleware" => ["auth:api"]], function () {
     Route::get('view-calendar/{id}',[ViewCalendarController::class, 'view']);
 
     Route::group(['prefix' => 'user'], function() {
+      // user profile picture
       Route::post('picture', [UserProfileController::class, 'uploadProfilePicture']);
+      // authenticated user data
       Route::get('data', function (Request $request) {
         return $request->user();
       });
+      // User Friends
+      Route::apiResource('friends', FriendController::class);
+      Route::get('/friend-requests', [FriendController::class, 'friendRequests']);
+
+      // User Permissions
+      Route::group(['prefix' => 'permissions'], function () {
+        Route::apiResource('/calendars', CalendarPermissionController::class);
+        Route::apiResource('/planners', PlannerPermissionController::class);
+      });
+    });
+
+    // search users
+    Route::group(['prefix' => 'search'], function() {
+      Route::post('/friends', [FriendController::class, 'searchFriends']);
     });
 
   });

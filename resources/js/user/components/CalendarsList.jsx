@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import HttpService from "../../service/http-service";
 import apiScheme from "../../constant/api-scheme";
 import { startFetchingCalendars } from "../../store/actions/calendar-actions";
-import { user } from "../../utils/utils";
+import { imgUrl, user } from "../../utils/utils";
 import LoadingComponent from "../../components/LoadingComponent";
 import NoDataFound from "../../components/NoDataFound";
 
@@ -23,23 +23,42 @@ const CalendarListItem = ({ calendar, deleteCalendar }) => {
 
   return (
     <div className="border-bottom my-2 d-md-flex justify-content-between align-items-center">
-      <div>
-        <Link
-          to={`/view/${calendar.id}`}
-          className="text-decoration-none"
-          title={`View calendar ${calendar.title}`}
-        >
-          <p className="mb-1">
-            <span className="mr-1">{calendar.title}</span>
+      <div className="d-flex align-items-center pb-3">
+        <div className="mr-2">
+          <img src={imgUrl("calendar.png")} alt="" className="icon-img-xl" />
+        </div>
+        <div className="">
+          <Link
+            to={`/view/${calendar.id}`}
+            className="text-decoration-none"
+            title={`View calendar ${calendar.title}`}
+          >
+            <p className="mb-1 font-weight-bold">
+              <span className="mr-1">{calendar.title}</span>
+            </p>
+          </Link>
+          <p className="text-muted small mb-0">
+            {calendar.desc || "No description"}
           </p>
-        </Link>
-        <p className="text-muted small mb-2">
-          {calendar.desc || "No description"}
-        </p>
+          <p className="small mb-0">
+            <span>{calendar.user.name}</span>
+          </p>
+        </div>
       </div>
       {canEdit && (
-        <div className="float-right btn-group btn-group-sm mb-2">
-          <Link to={`/planners?calendar_id=${calendar.id}`} className="btn btn-sm btn-secondary">
+        <>
+          {/* <div className="float-right btn-group btn-group-sm mb-2">
+          <Link
+            to={`/planners?calendar_id=${calendar.id}`}
+            className="btn btn-sm btn-secondary"
+          >
+            <span className="fa fa-cog mr-1"></span>
+            <span>Setting</span>
+          </Link>
+          <Link
+            to={`/planners?calendar_id=${calendar.id}`}
+            className="btn btn-sm btn-secondary"
+          >
             <span className="far fa-calendar-check mr-1"></span>
             <span>Planners</span>
           </Link>
@@ -59,7 +78,50 @@ const CalendarListItem = ({ calendar, deleteCalendar }) => {
             <span className="fa fa-trash mx-1"></span>
             <span>delete</span>
           </a>
-        </div>
+        </div> */}
+          <div className="dropdown dropleft">
+            <a
+              href=""
+              className="dropdown-toggle text-dark"
+              data-toggle="dropdown"
+            >
+              <span className="fa fa-wrench mr-1"></span>
+              <span>Action</span>
+            </a>
+            <div className="dropdown-menu">
+              <Link
+                to={`/calendars/setting/${calendar.id}`}
+                className="dropdown-item small"
+              >
+                <span className="fa fa-cog mr-1"></span>
+                <span>Settings</span>
+              </Link>
+              <Link
+                to={`/planners?calendar_id=${calendar.id}`}
+                className="dropdown-item small"
+              >
+                <span className="far fa-calendar-check mr-1 text-info"></span>
+                <span>Planners</span>
+              </Link>
+              <Link
+                to={`/calendars/edit/${calendar.id}`}
+                className="dropdown-item small"
+              >
+                <span className="far fa-edit mr-1 text-success"></span>
+                <span>Edit</span>
+              </Link>
+              <div className="dropdown-divider"></div>
+              <a
+                href="/"
+                className="dropdown-item small"
+                onClick={(e) => deleteCalendar(calendar)}
+              >
+                <span className="fa fa-trash mr-1 text-danger"></span>
+                <span>Delete</span>
+              </a>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
@@ -93,7 +155,9 @@ function CalendarsList() {
     Swal.fire({
       title: "Warning",
       icon: "warning",
-      html: `<span class="small">Are you sure, you want to delete <b class="text-danger">${calendar.title}<b> calendar</span>`,
+      html: `<span class="small">
+      Are you sure, you want to delete <b class="text-danger">${calendar.title}</b> calendar
+      </span>`,
       showCancelButton: true,
       cancelButtonText: "Keep",
       confirmButtonText: `<span class="fa fa-trash"></span> Yes, delete`,

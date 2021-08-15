@@ -49,4 +49,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function image() {
       return $this->morphOne(\App\Models\Images::class,'model');
     }
+
+    public function getFriendsAttribute()
+    {
+      return $this->friendsOfMine->merge($this->friendOf);
+    }
+
+    public function friendsOfMine()
+    {
+      return $this->hasMany(\App\Models\Friendship::class, 'user_id', 'id')
+      ->with(['friend']);
+    }
+
+    public function friendOf()
+    {
+      return $this->hasMany(\App\Models\Friendship::class,'friend_id', 'id')
+      ->with(['user']);
+    }
+
+
 }

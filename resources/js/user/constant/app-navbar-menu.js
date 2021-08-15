@@ -15,8 +15,8 @@ export default [
     label: "All user planners"
   },
   {
-    title: "Team",
-    path: "/team",
+    title: "Friends",
+    path: "/friends",
     label: "All user team mate"
   }
 ];

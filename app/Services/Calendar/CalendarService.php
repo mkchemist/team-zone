@@ -20,7 +20,14 @@ class CalendarService extends Service {
   * @return array
   */
   public function all(array $only = null) {
-    $model = Calendar::where('user_id', $this->user->id);
+    $model = Calendar::where('user_id', $this->user->id)
+            ->orWhere(function($query) {
+              $query->whereIn('id', function($query) {
+                $query->from('calendar_permissions')
+                  ->select('calendar_id')
+                  ->where('user_id', $this->user->id);
+              });
+            });
 
     $model = $this->queryParamBuilder($model);
 

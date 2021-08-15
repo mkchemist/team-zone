@@ -9,15 +9,24 @@ import { startFetchingCalendars } from "../store/actions/calendar-actions";
 import ViewCalendar from "./Pages/ViewCalendar";
 import PlannerPage from "./Pages/PlannerPage";
 import ProfilePage from "./Pages/ProfilePage";
+import FriendsPage from "./Pages/FriendsPage";
+import { fetchPermissions } from "../store/actions/permissions-actions";
 
 function App({}) {
   let dispatch = useDispatch();
   let calendarStore = useSelector(state => state.CalendarStore);
+  let permissionsStore = useSelector(state => state.PermissionsStore);
   React.useEffect(() => {
     if(calendarStore.status == "idle") {
       dispatch(startFetchingCalendars());
     }
   }, [calendarStore.status])
+
+  React.useEffect(() => {
+    if(permissionsStore.status === 'idle') {
+      dispatch(fetchPermissions());
+    }
+  },[permissionsStore.status]);
 
 
   return (
@@ -31,6 +40,7 @@ function App({}) {
             <Route path="/view/:id" component={ViewCalendar} />
             <Route path="/planners" component={PlannerPage} />
             <Route path='/profile' component={ProfilePage} />
+            <Route path='/friends' component={FriendsPage} />
           </Switch>
         </div>
       </Router>

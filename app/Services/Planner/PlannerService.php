@@ -16,9 +16,17 @@ class PlannerService extends Service
 
   public function all(array $only = null)
   {
-    $model = Planner::whereIn('calendar_id', function($query) {
+    $user = $this->user;
+    $model = Planner::whereIn('calendar_id', function($query) use($user) {
       $query->from('calendars')->select('id')
-        ->where('deleted_at', null)->get();
+        ->where('user_id', $user->id)
+        ->where('deleted_at', null);
+    })->orWhere(function($query) {
+      $query->whereIn('calendar_id', function($query) {
+        $query->from('calendar_permissions')
+          ->select('calendar_id')
+          ->where('user_id', $this->user->id);
+      });
     });
 
     $model = $this->queryParamBuilder($model);

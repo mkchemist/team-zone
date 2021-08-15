@@ -5,15 +5,15 @@ import appNavbarMenu from "../constant/app-navbar-menu";
 import {
   baseApiUrl,
   defaultProfileImage,
-  generateUrl,
   imgUrl,
   profileImage,
 } from "../../utils/utils";
-import UserProfilePictureComponent from "../../components/UserProfilePictureComponent";
+import NavbarFriendRequests from "./NavbarFriendRequests";
 
 function AppNavbar() {
   let userStore = useSelector((state) => state.UserStore);
   let baseUrl = baseApiUrl.replace("/api", "");
+
 
   return (
     <div className="bg-primary shadow">
@@ -48,13 +48,13 @@ function AppNavbar() {
                 </NavLink>
               </li>
             ))}
-            <li className="nav-item dropdown dropleft">
+            <NavbarFriendRequests />
+            <li className="nav-item dropleft">
               <a
                 href=""
                 className="nav-link text-white dropdown-toggle"
                 data-toggle="dropdown"
               >
-                {/* <span className="far fa-user-circle mx-1"></span> */}
                 <img
                   src={
                     userStore.data.image
@@ -67,10 +67,11 @@ function AppNavbar() {
                 />
                 <span>{userStore.data.name}</span>
               </a>
+
               <div className="dropdown-menu dropdown-menu-left">
                 <Link
                   to="/profile"
-                  className="dropdown-item"
+                  className="dropdown-item small"
                   title="view user profile data"
                 >
                   {/* <span className="far fa-user-circle text-primary mx-1"></span> */}

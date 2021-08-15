@@ -11,15 +11,17 @@ const PlannerListComponentItem = ({ item }) => {
   let dispatch = useDispatch();
 
   const deletePlanner = planner => {
+    console.log(planner)
     window.event.preventDefault();
     Swal.fire({
       title: "Warning",
-      html : `Are you sure, you want to delete planner ${planner.name}?`,
+      html : `Are you sure, you want to delete planner <b class="text-danger">${planner.title}</b> ?`,
       icon: "success",
       showCancelButton: true,
       confirmButtonText: `<span class="fa fa-trash"></span> Yes, Delete`,
       confirmButtonColor: '#ec5151',
-      cancelButtonText: `<span class="fa fa-times"></span> Keep`
+      cancelButtonText: `<span class="fa fa-times"></span> Keep`,
+      toast: true
     }).then(res => {
       if(res.isConfirmed) {
         HttpService.delete(`${apiScheme.planners}/${planner.id}`)
