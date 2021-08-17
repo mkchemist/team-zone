@@ -44,6 +44,9 @@ function AddPlannerEventModal({ show, onClose, start, end }) {
       allDay: false,
       planner_id: "",
       fav: false,
+      who: '',
+      where: '',
+      content: ''
     },
     validationSchema: Yup.object({
       title: Yup.string().required(),
@@ -63,7 +66,7 @@ function AddPlannerEventModal({ show, onClose, start, end }) {
           );
           onClose();
 
-          formik.resetForm()
+          formik.resetForm();
         })
         .catch((err) => {
           console.log(err);
@@ -182,6 +185,45 @@ function AddPlannerEventModal({ show, onClose, start, end }) {
             </div>
           </div>
           {/* end of start and end */}
+          {/* who and where */}
+          <div className="row mx-auto">
+            <div className="col">
+              <label htmlFor="">Who</label>
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                value={formik.values.who}
+                onChange={formik.handleChange}
+                name="who"
+                id="who"
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="">Where</label>
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                value={formik.values.where}
+                onChange={formik.handleChange}
+                name="where"
+                id="where"
+              />
+            </div>
+          </div>
+          {/* end of who and where */}
+          <div className="form-group p-2">
+            <label htmlFor="">Content</label>
+            <textarea
+              name="content"
+              id="content"
+              cols="30"
+              rows="5"
+              className="form-control form-control-sm"
+              placeholder="Enter content"
+              value={formik.values.content}
+              onChange={formik.handleChange}
+            ></textarea>
+          </div>
           {/* controller */}
           <hr />
           <div className="text-right form-group">

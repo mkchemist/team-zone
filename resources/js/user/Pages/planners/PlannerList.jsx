@@ -15,6 +15,8 @@ function PlannerList() {
   const [planners, setPlanners] = React.useState([]);
   const location = useLocation();
   const [searchKey, setSearchKey] = React.useState(null);
+
+
   React.useEffect(() => {
     if (PlannerStore.status === "idle") {
       getPlanners();

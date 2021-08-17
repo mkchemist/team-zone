@@ -2,10 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import NoDataFound from "../../../components/NoDataFound";
+import { useSelector } from "react-redux";
 
 function ViewCalendarPlannerSelect({ list, onUpdate }) {
   let [viewList, setViewList] = React.useState([]);
-  let {id} = useParams()
+  let [calendarPlanners, setCalendarPlanners] = React.useState([]);
+  let { id } = useParams();
+  let user = useSelector((state) => state.UserStore.data);
+  let calendarsStore = useSelector((state) => state.CalendarStore);
+  let [canAddPlanner, toggleCanAddPlanner] = React.useState(false);
+
   function handleViewListChange(item) {
     let checked = window.event.target.checked;
     let $list = [];
@@ -20,19 +26,30 @@ function ViewCalendarPlannerSelect({ list, onUpdate }) {
   }
 
   React.useEffect(() => {
-    let planners = list.map((item) => item.title);
-
+    let $planners = list.filter((item) => item.calendar.id === parseInt(id));
+    setCalendarPlanners($planners);
+    let planners = $planners.map((item) => item.title);
     setViewList(planners);
   }, [list]);
+
+  React.useEffect(() => {
+    let matched = calendarsStore.data.filter((cal) => cal.id === parseInt(id));
+    if (matched.length) {
+      let cal = matched[0];
+      if (cal.user.id === user.id) {
+        toggleCanAddPlanner(true);
+      }
+    }
+  }, [calendarsStore.status, id]);
 
   return (
     <div>
       <div className="border rounded p-2">
         <p className="lead mb-0">Planners</p>
         <hr />
-        {list.length ? (
+        {calendarPlanners.length ? (
           <nav className="nav">
-            {list.map((item, itemIndex) => (
+            {calendarPlanners.map((item, itemIndex) => (
               <li
                 key={`list_item_${itemIndex}_${item.id}`}
                 className="col-12 nav-item"
@@ -51,18 +68,22 @@ function ViewCalendarPlannerSelect({ list, onUpdate }) {
             ))}
           </nav>
         ) : (
-          <NoDataFound text={'No Planners found'} textClass={'small text-primary'} />
+          <NoDataFound
+            text={"No Planners found"}
+            textClass={"small text-primary"}
+          />
         )}
-
-        <div className="text-right">
-          <Link
-            to={`/planners/add`}
-            className="text-decoration-none"
-            title="Add planner"
-          >
-            <span className="fa fa-plus-circle"></span>
-          </Link>
-        </div>
+        {canAddPlanner === true ? (
+          <div className="text-right">
+            <Link
+              to={`/planners/add`}
+              className="text-decoration-none"
+              title="Add planner"
+            >
+              <span className="fa fa-plus-circle"></span>
+            </Link>
+          </div>
+        ) : null}
       </div>
     </div>
   );

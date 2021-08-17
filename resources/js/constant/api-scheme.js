@@ -9,7 +9,7 @@ export default {
   friendsSearch: "v1/search/friends",
   friendRequests: "v1/user/friend-requests",
   permission: {
-    calendars: 'v1/user/permissions/calendars',
     planners: 'v1/user/permissions/planners'
-  }
+  },
+  invite: 'v1/user/invite'
 };

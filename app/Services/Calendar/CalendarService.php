@@ -23,7 +23,7 @@ class CalendarService extends Service {
     $model = Calendar::where('user_id', $this->user->id)
             ->orWhere(function($query) {
               $query->whereIn('id', function($query) {
-                $query->from('calendar_permissions')
+                $query->from('planner_permissions')
                   ->select('calendar_id')
                   ->where('user_id', $this->user->id);
               });

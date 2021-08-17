@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\CalendarController;
 use App\Http\Controllers\Api\V1\CalendarPermissionController;
 use App\Http\Controllers\Api\V1\FriendController;
+use App\Http\Controllers\Api\V1\InviteController;
 use App\Http\Controllers\Api\V1\PlannerController;
 use App\Http\Controllers\Api\V1\PlannerEventController;
 use App\Http\Controllers\Api\V1\PlannerPermissionController;
@@ -58,9 +59,11 @@ Route::group(["middleware" => ["auth:api"]], function () {
 
       // User Permissions
       Route::group(['prefix' => 'permissions'], function () {
-        Route::apiResource('/calendars', CalendarPermissionController::class);
         Route::apiResource('/planners', PlannerPermissionController::class);
       });
+
+      // invite friend
+      Route::post('/invite', [InviteController::class, 'sendInvite']);
     });
 
     // search users

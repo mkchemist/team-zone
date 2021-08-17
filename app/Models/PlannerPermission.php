@@ -10,15 +10,21 @@ class PlannerPermission extends Model
     use HasFactory;
 
     protected $fillable = [
-      'owner_id',
       'user_id',
       'calendar_id',
-      'can_read',
-      'can_create',
-      'can_edit',
-      'can_delete',
-      'can_restore',
+      'planner_id',
+      'permission',
+      'owner_id',
     ];
+
+    public function calendar() {
+      return $this->belongsTo(\App\Models\Calendar::class);
+    }
+
+    public function user()
+    {
+      return $this->belongsTo(\App\Models\User::class);
+    }
 
     public function planner()
     {
@@ -28,10 +34,5 @@ class PlannerPermission extends Model
     public function owner()
     {
       return $this->belongsTo(\App\Models\User::class, 'owner_id');
-    }
-
-    public function user()
-    {
-      return $this->belongsTo(\App\Models\User::class);
     }
 }

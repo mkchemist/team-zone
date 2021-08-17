@@ -22,6 +22,9 @@ class CreatePlannerEventsTable extends Migration
             $table->dateTime('end');
             $table->boolean('allDay')->default(true);
             $table->boolean('fav')->default(false);
+            $table->text('who')->nullable();
+            $table->text('where')->nullable();
+            $table->longText('content')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('planner_id')->references('id')->on('planners')->onDelete('cascade');

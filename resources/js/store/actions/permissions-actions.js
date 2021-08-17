@@ -25,9 +25,9 @@ export function handleFetchPermissionError(error) {
 export function fetchPermissions() {
   return dispatch =>  {
     dispatch(startFetchPermissions());
-    HttpService.get(apiScheme.permission.calendars)
+    HttpService.get(apiScheme.permission.planners)
     .then(({data}) => {
-      dispatch(handleFetchPermission(data.data))
+      dispatch(handleFetchPermission(data))
     }).catch(err => {
       console.log(err)
       dispatch(handleFetchPermissionError(err.message))

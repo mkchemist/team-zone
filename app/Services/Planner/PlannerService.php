@@ -22,9 +22,9 @@ class PlannerService extends Service
         ->where('user_id', $user->id)
         ->where('deleted_at', null);
     })->orWhere(function($query) {
-      $query->whereIn('calendar_id', function($query) {
-        $query->from('calendar_permissions')
-          ->select('calendar_id')
+      $query->whereIn('id', function($query) {
+        $query->from('planner_permissions')
+          ->select('planner_id')
           ->where('user_id', $this->user->id);
       });
     });

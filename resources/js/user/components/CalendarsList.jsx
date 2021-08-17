@@ -89,13 +89,13 @@ const CalendarListItem = ({ calendar, deleteCalendar }) => {
               <span>Action</span>
             </a>
             <div className="dropdown-menu">
-              <Link
+              {/* <Link
                 to={`/calendars/setting/${calendar.id}`}
                 className="dropdown-item small"
               >
                 <span className="fa fa-cog mr-1"></span>
                 <span>Settings</span>
-              </Link>
+              </Link> */}
               <Link
                 to={`/planners?calendar_id=${calendar.id}`}
                 className="dropdown-item small"

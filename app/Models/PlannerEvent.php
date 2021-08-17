@@ -17,6 +17,9 @@ class PlannerEvent extends Model
       'end',
       'allDay',
       'fav',
+      'who',
+      'where',
+      'content'
     ];
 
 

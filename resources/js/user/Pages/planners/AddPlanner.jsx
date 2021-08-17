@@ -19,6 +19,7 @@ function AddPlanner() {
   let [calendars, setCalendars] = React.useState([]);
   let location = useLocation();
   let history = useHistory()
+  let user = useSelector(state => state.UserStore.data)
 
   let formik = useFormik({
     initialValues: {
@@ -57,7 +58,9 @@ function AddPlanner() {
   }
 
   React.useEffect(() => {
-    setCalendars(calendarsStore.data);
+    let cals = calendarsStore.data;
+    cals = cals.filter(cal => cal.user.id === user.id)
+    setCalendars(cals);
   }, [calendarsStore.status, location]);
 
   return (

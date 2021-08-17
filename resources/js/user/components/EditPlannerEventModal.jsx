@@ -8,7 +8,7 @@ import HttpService from "../../service/http-service";
 import apiScheme from "../../constant/api-scheme";
 import { useDispatch } from "react-redux";
 import { calendarRequest } from "../../store/actions/view-calendar";
-import moment from "moment"
+import moment from "moment";
 
 const ModalHeader = () => (
   <div className="p-2 col-12 bg-warning text-dark">
@@ -21,38 +21,48 @@ const ModalHeader = () => (
 
 function EditPlannerEventModal(props) {
   let [event, setEvent] = React.useState(props.event);
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
   let formik = useFormik({
     initialValues: {
-      start: moment(props.event.start).format('YYYY-MM-DDThh:mm'),
-      end: moment(props.event.end).format('YYYY-MM-DDThh:mm'),
+      start: moment(props.event.start).format("YYYY-MM-DDThh:mm"),
+      end: moment(props.event.end).format("YYYY-MM-DDThh:mm"),
       allDay: props.event.allDay,
       fav: props.event.fav,
+      who: props.event.who || '',
+      where: props.event.where || '',
+      content: props.event.content || ''
     },
     validationSchema: Yup.object({}),
     onSubmit: (values) => {
-      HttpService.put(apiScheme.events+ `/${event.id}`, {
+      HttpService.put(apiScheme.events + `/${event.id}`, {
         title: event.title,
         start: values.start,
         end: values.end,
         allDay: values.allDay,
-        fav: values.fav
-      }).then(({data}) => {
-        Swal.fire({
-          title :"Success",
-          html: `Event <b class="text-danger">${event.title}</b> updated`,
-          icon: "success",
-          toast: true,
-          timer: 5000,
-          timerProgressBar: true
-        })
-        dispatch(calendarRequest({
-          id: event.calendar.id
-        }))
-        props.onClose()
-      }).catch(err => {
-        console.log(err)
+        fav: values.fav,
+        who: values.who,
+        where: values.where,
+        content: values.content
       })
+        .then(({ data }) => {
+          Swal.fire({
+            title: "Success",
+            html: `Event <b class="text-danger">${event.title}</b> updated`,
+            icon: "success",
+            toast: true,
+            timer: 5000,
+            timerProgressBar: true,
+          });
+          dispatch(
+            calendarRequest({
+              id: event.calendar.id,
+            })
+          );
+          props.onClose();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   });
 
@@ -60,8 +70,8 @@ function EditPlannerEventModal(props) {
     setEvent(props.event);
     let updatedFormikValues = {
       ...formik.values,
-      start: moment(props.event.start).format('YYYY-MM-DDThh:mm'),
-      end: moment(props.event.end).format('YYYY-MM-DDThh:mm'),
+      start: moment(props.event.start).format("YYYY-MM-DDThh:mm"),
+      end: moment(props.event.end).format("YYYY-MM-DDThh:mm"),
       allDay: props.event.allDay,
       fav: props.event.fav,
     };
@@ -74,28 +84,31 @@ function EditPlannerEventModal(props) {
       html: `Are you sure, you want to delete <b class="text-danger">${event.title}</b>?`,
       icon: "warning",
       showCancelButton: true,
-      cancelButtonText: 'Keep',
-      confirmButtonColor: '#f14e4a',
-      confirmButtonText: `<span class="fa fa-trash"></span> Yes, delete`
+      cancelButtonText: "Keep",
+      confirmButtonColor: "#f14e4a",
+      confirmButtonText: `<span class="fa fa-trash"></span> Yes, delete`,
     }).then((res) => {
       if (res.isConfirmed) {
-        HttpService.delete(apiScheme.events+`/${event.id}`)
-        .then(({data}) => {
-          Swal.fire({
-            title: 'Success',
-            html: `Event <b class="text-danger">${event.title}</b> Deleted`,
-            icon: "success",
-            toast: true,
-            timer: 5000,
-            timerProgressBar: true
+        HttpService.delete(apiScheme.events + `/${event.id}`)
+          .then(({ data }) => {
+            Swal.fire({
+              title: "Success",
+              html: `Event <b class="text-danger">${event.title}</b> Deleted`,
+              icon: "success",
+              toast: true,
+              timer: 5000,
+              timerProgressBar: true,
+            });
+            dispatch(
+              calendarRequest({
+                id: event.calendar.id,
+              })
+            );
+            props.onClose();
           })
-          dispatch(calendarRequest({
-            id: event.calendar.id
-          }))
-          props.onClose()
-        }).catch(err => {
-          console.log(err)
-        })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     });
   };
@@ -196,6 +209,45 @@ function EditPlannerEventModal(props) {
               </div>
             </div>
             {/* end of start and end */}
+            {/* who and where */}
+            <div className="row mx-auto">
+              <div className="col">
+                <label htmlFor="">Who</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={formik.values.who}
+                  onChange={formik.handleChange}
+                  name="who"
+                  id="who"
+                />
+              </div>
+              <div className="col">
+                <label htmlFor="">Where</label>
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  value={formik.values.where}
+                  onChange={formik.handleChange}
+                  name="where"
+                  id="where"
+                />
+              </div>
+            </div>
+            {/* end of who and where */}
+            <div className="form-group p-2">
+              <label htmlFor="">Content</label>
+              <textarea
+                name="content"
+                id="content"
+                cols="30"
+                rows="5"
+                className="form-control form-control-sm"
+                placeholder="Enter content"
+                value={formik.values.content}
+                onChange={formik.handleChange}
+              ></textarea>
+            </div>
             {/* controller */}
             <hr />
             <div className="text-right form-group">
@@ -203,7 +255,11 @@ function EditPlannerEventModal(props) {
                 <span className="far fa-edit mx-1"></span>
                 <span>Save</span>
               </button>
-              <button type="button" className="btn btn-sm btn-danger mx-1" onClick={deleteEvent}>
+              <button
+                type="button"
+                className="btn btn-sm btn-danger mx-1"
+                onClick={deleteEvent}
+              >
                 <span className="fa fa-trash mx-1"></span>
                 <span>Delete</span>
               </button>

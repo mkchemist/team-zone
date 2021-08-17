@@ -46,10 +46,11 @@ function DashboardCalendarsList() {
                 <p className="mb-0">
                   <span>{cal.title}</span>
                 </p>
-                <p className="small text-muted">
+                <p className="small mb-0 text-muted">
                   {" "}
                   {cal.desc || "No description"}
                 </p>
+                <p className="mb-0 small text-muted">Created by {cal.user.name}</p>
               </Link>
             </div>
           ))}

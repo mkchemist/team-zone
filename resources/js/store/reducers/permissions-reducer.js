@@ -38,8 +38,8 @@ export default function (state = initialState, action) {
     case HANDLE_FETCH_PERMISSIONS:
       return {
         status: 'succeeded',
-        userPermissions: action.payload.user_permissions,
-        friendsPermissions: action.payload.friends_permissions,
+        userPermissions: action.payload.user,
+        friendsPermissions: action.payload.friends,
         error: null
       }
     case HANDLE_FETCH_PERMISSIONS_ERROR:

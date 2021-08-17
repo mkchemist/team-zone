@@ -21,6 +21,9 @@ class PlannerEventResource extends JsonResource
           'end' => date($this->end),
           'allDay' => false,
           'fav' => $this->fav ? true : false,
+          'who' => $this->who,
+          'where' => $this->where,
+          'content' => $this->content,
           'user' => [
             'name' => $this->user->name,
             'email' => $this->user->email,

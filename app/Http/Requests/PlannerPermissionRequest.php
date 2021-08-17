@@ -24,14 +24,11 @@ class PlannerPermissionRequest extends FormRequest
   public function rules()
   {
     $rules = [
-      'can_read'    =>  'boolean|nullable',
-      'can_edit'    =>  'boolean|nullable',
-      'can_create'  =>  'boolean|nullable',
-      'can_delete'  =>  'boolean|nullable',
-      'can_restore'  =>  'boolean|nullable',
+      'permission' => 'required|string'
     ];
     if (request()->method() === "POST") {
       $rules = array_merge($rules, [
+        'calendar_id' => 'required|numeric',
         'planner_id' =>  'required|numeric',
         'user_id'     =>  'required|numeric',
       ]);

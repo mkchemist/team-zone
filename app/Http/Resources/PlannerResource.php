@@ -30,7 +30,8 @@ class PlannerResource extends JsonResource
           ],
           'user' => [
             'name' => $this->calendar->user->name,
-            'email' => $this->calendar->user->email
+            'email' => $this->calendar->user->email,
+            'id' => $this->calendar->user_id
           ]
 
         ];

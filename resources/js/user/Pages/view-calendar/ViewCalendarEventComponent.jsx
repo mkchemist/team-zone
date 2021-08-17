@@ -13,7 +13,7 @@ function ViewCalendarEventComponent({ event }) {
       <div>
         {event.fav && <span className="fa fa-star text-warning"></span>}
         <span className={`${event.style.icon} mx-1`}></span>
-        <span className="font-weight-bold">{event.title}</span>
+        <span className="font-weight-bold">{event.title} - by {event.who}</span>
       </div>
       <img
         src={
