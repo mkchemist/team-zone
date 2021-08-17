@@ -4,6 +4,7 @@ export default {
   events: "v1/events",
   profile: {
     picture: "v1/user/picture",
+    removePicture: "v1/user/picture-remove"
   },
   friends: "v1/user/friends",
   friendsSearch: "v1/search/friends",

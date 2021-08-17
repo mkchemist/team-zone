@@ -43,6 +43,18 @@ class UserProfileController extends Controller
       }catch(Exception $e) {
         return ResponseHelper::serverError($e);
       }
+    }
 
+    public function removeProfilePicture(Request $request)
+    {
+      $user = $request->user();
+
+      if($user->image) {
+        $user->image->delete();
+      }
+
+      return response([
+        'message' => 'Profile picture has been cleared'
+      ], 200);
     }
 }

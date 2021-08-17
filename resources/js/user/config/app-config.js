@@ -1,4 +1,6 @@
+import { baseUri } from "../../utils/utils";
+
 export default {
-  baseUri: '/dashboard',
+  baseUri: baseUri +'dashboard',
   baseApi: '/users',
 }

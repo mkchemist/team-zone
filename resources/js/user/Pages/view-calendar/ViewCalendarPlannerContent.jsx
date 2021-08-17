@@ -74,6 +74,7 @@ function ViewCalendarPlannerContent({ events }) {
     if(!canUpdate && data.user.id !== user.id) {
       return;
     }
+    setEditedEvent(null);
     setEditedEvent(data);
     setEditModal(true);
   };

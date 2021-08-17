@@ -83,6 +83,35 @@ function ChangeProfilePictureComponent() {
       });
   };
 
+
+  const removeProfilePicture = () => {
+    Swal.fire({
+      title: "Info",
+      html: `<span>Are you sure, you want to reset your profile picture</span>`,
+      icon: 'info',
+      toast: true,
+      showCancelButton: true
+    }).then(res => {
+      if(res.isConfirmed) {
+
+        HttpService.post(apiScheme.profile.removePicture)
+        .then(({data}) => {
+          Swal.fire({
+            title: "Success",
+            text: data.message,
+            icon: "success",
+            toast: true,
+            timer: 3000,
+            timerProgressBar: true
+          })
+          dispatch(refreshUserData())
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    })
+  }
+
   return (
     <div className="my-2">
       <button
@@ -114,6 +143,10 @@ function ChangeProfilePictureComponent() {
                 <span className="fa fa-upload mr-1"></span>
                 <span>Upload Picture</span>
               </button>
+              <button className="btn btn-sm btn-block btn-secondary" type="button" onClick={removeProfilePicture}>
+                <span className="fa fa-user-slash"></span>
+                <span>Default Picture</span>
+              </button>
               <input
                 type="file"
                 style={{ display: "none" }}
@@ -125,7 +158,7 @@ function ChangeProfilePictureComponent() {
                   Allowed file types : <b>JPG,JPEG,GIF,SVG</b>
                 </p>
                 <p className="mb-0">
-                  Max. file size: <b>1 MB</b>
+                  Max. file size: <b>1.6 MB</b>
                 </p>
                 {uploadError && (
                   <p className="my-2 alert alert-danger">{uploadError}</p>

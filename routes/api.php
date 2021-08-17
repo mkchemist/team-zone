@@ -49,6 +49,7 @@ Route::group(["middleware" => ["auth:api"]], function () {
     Route::group(['prefix' => 'user'], function() {
       // user profile picture
       Route::post('picture', [UserProfileController::class, 'uploadProfilePicture']);
+      Route::post('picture-remove', [UserProfileController::class, 'removeProfilePicture']);
       // authenticated user data
       Route::get('data', function (Request $request) {
         return $request->user();
