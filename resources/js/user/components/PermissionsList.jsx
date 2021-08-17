@@ -7,6 +7,7 @@ import HttpService from "../../service/http-service";
 import apiScheme from "../../constant/api-scheme";
 import { useDispatch } from "react-redux";
 import { fetchPermissions } from "../../store/actions/permissions-actions";
+import { defaultProfileImage, profileImage } from "../../utils/utils";
 
 function PermissionsList({ data }) {
   let dispatch = useDispatch();
@@ -54,6 +55,7 @@ function PermissionsList({ data }) {
               <tr>
                 <th>Action</th>
                 <th>User</th>
+                <th>User Profile</th>
                 <th>Calendar</th>
                 <th>Planner</th>
                 <th>Permission</th>
@@ -91,6 +93,17 @@ function PermissionsList({ data }) {
                     </div>
                   </td>
                   <td>{item.user.name}</td>
+                  <td>
+                    <img
+                      src={
+                        item.user.image
+                          ? profileImage(item.user.image.url)
+                          : defaultProfileImage()
+                      }
+                      alt={`${item.user.name} profile picture`}
+                      className="icon-img"
+                    />
+                  </td>
                   <td>{item.calendar.title}</td>
                   <td>{item.planner.title}</td>
                   <td>{item.permission}</td>
@@ -102,7 +115,7 @@ function PermissionsList({ data }) {
                       ></span>
                       <span
                         className={`${item.planner.style.icon} fa-stack-1x`}
-                        style={{ color: item.planner.color }}
+                        style={{ color: item.planner.style.color }}
                       ></span>
                     </span>
                   </td>

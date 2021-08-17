@@ -28,7 +28,8 @@ class PermissionResource extends JsonResource
       'user'=> [
         'id' => $this->user->id,
         'name' => $this->user->name,
-        'email' => $this->user->email
+        'email' => $this->user->email,
+        'image' => $this->user->image ? ['url' => $this->user->image->url] : null
       ],
       'planner' => [
         'title' => $this->planner->title,
