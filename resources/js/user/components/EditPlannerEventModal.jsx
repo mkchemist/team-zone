@@ -67,6 +67,8 @@ function EditPlannerEventModal(props) {
   });
 
   React.useEffect(() => {
+    setEvent({});
+    console.log(props.event)
     setEvent(props.event);
     let updatedFormikValues = {
       ...formik.values,
@@ -74,6 +76,9 @@ function EditPlannerEventModal(props) {
       end: moment(props.event.end).format("YYYY-MM-DDThh:mm"),
       allDay: props.event.allDay,
       fav: props.event.fav,
+      who: props.event.who || '',
+      where: props.event.where || '',
+      content: props.event.content || ''
     };
     formik.setValues(updatedFormikValues);
   }, [props.event]);
