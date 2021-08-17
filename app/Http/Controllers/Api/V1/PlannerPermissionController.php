@@ -52,7 +52,13 @@ class PlannerPermissionController extends Controller
       $data = $request->only(['calendar_id', 'user_id', 'planner_id', 'permission']);
       $data['owner_id'] = $user->id;
       try {
-        $permission = PlannerPermission::create($data);
+        $permission = PlannerPermission::updateOrCreate([
+          'user_id' => $request->user_id,
+          'planner_id' => $request->planner_id,
+          'calendar_id' => $request->calendar_id
+        ], [
+          'permission' => $request->permission
+        ]);
          return response([
             'message' => 'Permission created',
             'data' => $permission

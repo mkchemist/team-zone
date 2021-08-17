@@ -4,9 +4,10 @@ import { Provider } from "react-redux";
 import App from "./App";
 import Store from "./store";
 
-Store.subscribe(() => {
+/* Store.subscribe(() => {
   console.log(Store.getState())
-})
+}) */
+
 
 const AppWrapper = () => {
   return (

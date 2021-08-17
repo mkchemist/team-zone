@@ -12,7 +12,6 @@ import ProfilePage from "./Pages/ProfilePage";
 import FriendsPage from "./Pages/FriendsPage";
 import { fetchPermissions } from "../store/actions/permissions-actions";
 
-console.log(AppConfig)
 function App({}) {
   let dispatch = useDispatch();
   let calendarStore = useSelector(state => state.CalendarStore);

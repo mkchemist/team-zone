@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\InviteController;
 use App\Http\Controllers\Api\V1\PlannerController;
 use App\Http\Controllers\Api\V1\PlannerEventController;
 use App\Http\Controllers\Api\V1\PlannerPermissionController;
+use App\Http\Controllers\Api\V1\UpComingEventsController;
 use App\Http\Controllers\Api\V1\UserProfileController;
 use App\Http\Controllers\Api\V1\ViewCalendarController;
 use App\Http\Controllers\LoginController;
@@ -45,6 +46,8 @@ Route::group(["middleware" => ["auth:api"]], function () {
     Route::apiResource('events', PlannerEventController::class);
 
     Route::get('view-calendar/{id}',[ViewCalendarController::class, 'view']);
+
+    Route::get('upcoming-events', UpComingEventsController::class);
 
     Route::group(['prefix' => 'user'], function() {
       // user profile picture

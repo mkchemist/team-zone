@@ -1,8 +1,13 @@
 import React from "react";
+import HttpService from "../../service/http-service";
 import { imgUrl } from "../../utils/utils";
 
 function DashboardIncomingEvents() {
   let [events, setEvents] = React.useState([]);
+
+  React.useEffect(() => {
+
+  }, [])
 
   function fetchEvents() {
     // TODO should be removed after connection to api service
@@ -42,8 +47,12 @@ function DashboardIncomingEvents() {
         }
       },
     ];
-
-    setEvents($events);
+    HttpService.get('v1/upcoming-events')
+    .then(({data}) => {
+      setEvents(data.data);
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   React.useEffect(fetchEvents, []);
@@ -82,7 +91,7 @@ function DashboardIncomingEvents() {
                 {$e.start} - {$e.end}
               </p>
               <p className="mb-0 text-dark small">
-                From <b>{$e.planners.title}</b> planner by <b>{$e.calendar.owner_name}</b>
+                From <b>{$e.planner.title}</b> planner by <b>{$e.calendar.owner_name}</b>
               </p>
             </div>
           </div>
