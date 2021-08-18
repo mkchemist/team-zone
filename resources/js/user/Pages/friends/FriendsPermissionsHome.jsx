@@ -5,6 +5,7 @@ import ErrorHandlingComponent from "../../../components/ErrorHandlingComponent";
 import LoadingComponent from "../../../components/LoadingComponent";
 import SearchBox from "../../../components/SearchBox";
 import { imgUrl } from "../../../utils/utils";
+import MassPermissionAssignment from "../../components/MassPermissionAssignment";
 import PermissionsList from "../../components/PermissionsList";
 
 export default function FriendsPermissionsHome() {
@@ -46,8 +47,9 @@ export default function FriendsPermissionsHome() {
           <span className="fa fa-plus mr-1"></span>
           <span>Add permission</span>
         </Link>
+        <MassPermissionAssignment />
         <button
-          className="btn btn-sm btn-light border mx-1"
+          className="btn btn-sm btn-light border"
           title="refresh page"
         >
           <span className="fa fa-sync-alt mr-1"></span>

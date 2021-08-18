@@ -55,7 +55,8 @@ class PlannerPermissionController extends Controller
         $permission = PlannerPermission::updateOrCreate([
           'user_id' => $request->user_id,
           'planner_id' => $request->planner_id,
-          'calendar_id' => $request->calendar_id
+          'calendar_id' => $request->calendar_id,
+          'owner_id' => $user->id
         ], [
           'permission' => $request->permission
         ]);
@@ -146,5 +147,37 @@ class PlannerPermissionController extends Controller
         'user' => $userPermissions,
         'friends' => $friendsPermissions
       ];
+    }
+
+
+    public function massAssign(Request $request)
+    {
+      $auth = $request->user();
+      $request->validate([
+        'calendar_id' => 'required|numeric',
+        'planner_id' => 'required|numeric',
+        'permission' => 'required|string',
+        'users' => 'required|json'
+      ]);
+
+      $users = json_decode($request->users);
+
+      $data = [];
+
+      foreach($users as $user) {
+        $data[] = [
+          'user_id' => $user,
+          'calendar_id' => $request->calendar_id,
+          'planner_id' => $request->planner_id,
+          'permission' => $request->permission,
+          'owner_id' => $auth->id
+        ];
+      }
+
+      PlannerPermission::insert($data);
+
+      return response([
+        'message' => "Permission created"
+      ]);
     }
 }

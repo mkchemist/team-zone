@@ -1,29 +1,47 @@
 import { useFormik } from "formik";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BackButton from "../../../components/BackButton";
 import * as Yup from "yup";
+import HttpService from "../../../service/http-service";
+import apiScheme from "../../../constant/api-scheme";
+import Swal from "sweetalert2";
+import { refreshUserData } from "../../../store/actions/user-actions";
 
 function ProfileHome() {
   let UserStore = useSelector((state) => state.UserStore);
+  let dispatch = useDispatch()
 
   let formik = useFormik({
     initialValues: {
       name: UserStore.data.name,
       email: UserStore.data.email,
-      gender: UserStore.data.gender,
-      company: UserStore.data.company,
-      phone: UserStore.data.phone,
+      gender: UserStore.data.gender || '',
+      company: UserStore.data.company || '',
+      phone: UserStore.data.phone || '',
+      birth_date: UserStore.data.birth_date || ''
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Name required"),
-      email: Yup.string().required("Email required"),
-      gender: Yup.string().nullable(),
+      email: Yup.string().required("Email required").email("Email is not valid"),
+      gender: Yup.string().required().oneOf(['male', 'female']),
       company: Yup.string().nullable(),
       phone: Yup.number("Phone must be a valid phone number").nullable(),
+      birth_date: Yup.date().nullable()
     }),
     onSubmit: (values) => {
-      console.log(values);
+      HttpService.put(apiScheme.profile.updateProfile, values)
+      .then(({data}) => {
+        Swal.fire({
+          title: "Success",
+          text: data.message,
+          icon: "success",
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true
+        })
+        dispatch(refreshUserData());
+      }).catch(err => console.log(err))
     },
   });
 
@@ -35,7 +53,7 @@ function ProfileHome() {
       </p>
       <hr />
       <div className="p-2">
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <div className="form-group">
             <p>
               Email verified{" "}
@@ -56,22 +74,42 @@ function ProfileHome() {
                     ? "border border-danger"
                     : ""
                 }`}
+                value={formik.values.name}
+                onChange={formik.handleChange}
               />
             </div>
             <div className="form-group col">
               <label htmlFor="">Email</label>
+              {formik.errors.email || formik.touched.email ? (
+                <span className="text-danger small">{formik.errors.name}</span>
+              ) : null}
               <input
                 type="email"
                 placeholder="User email"
-                className="form-control form-control-sm"
+                className={`form-control form-control-sm ${
+                  formik.errors.email && formik.touched.email
+                    ? "border border-danger"
+                    : ""
+                }`}
+                value={formik.values.email}
+                onChange={formik.handleChange}
               />
             </div>
             <div className="form-group col-auto">
               <label htmlFor="">Gender</label>
+              {formik.errors.name || formik.touched.name ? (
+                <span className="text-danger small">{formik.errors.name}</span>
+              ) : null}
               <select
                 name="gender"
                 id="gender"
-                className="form-control form-control-sm"
+                className={`form-control form-control-sm ${
+                  formik.errors.email && formik.touched.email
+                    ? "border border-danger"
+                    : ""
+                }`}
+                value={formik.values.gender}
+                onChange={formik.handleChange}
               >
                 <option value="">Select gender</option>
                 <option value="male">male</option>
@@ -86,6 +124,8 @@ function ProfileHome() {
                 type="date"
                 placeholder="Date of birth"
                 className="form-control form-control-sm"
+                value={formik.values.birth_date}
+                onChange={formik.handleChange}
               />
             </div>
             <div className="form-group col">
@@ -94,6 +134,8 @@ function ProfileHome() {
                 type="text"
                 placeholder="Company"
                 className="form-control form-control-sm"
+                value={formik.values.company}
+                onChange={formik.handleChange}
               />
             </div>
             <div className="form-group col">
@@ -102,6 +144,8 @@ function ProfileHome() {
                 type="number"
                 placeholder="Phone number"
                 className="form-control form-control-sm"
+                value={formik.values.phone}
+                onChange={formik.handleChange}
               />
             </div>
           </div>

@@ -53,6 +53,10 @@ Route::group(["middleware" => ["auth:api"]], function () {
       // user profile picture
       Route::post('picture', [UserProfileController::class, 'uploadProfilePicture']);
       Route::post('picture-remove', [UserProfileController::class, 'removeProfilePicture']);
+      // update profile
+      Route::put('/update-profile', [UserProfileController::class, 'updateUserProfile']);
+      // change password
+      Route::put('/change-password', [UserProfileController::class, 'changePassword']);
       // authenticated user data
       Route::get('data', function (Request $request) {
         return $request->user();
@@ -64,6 +68,7 @@ Route::group(["middleware" => ["auth:api"]], function () {
       // User Permissions
       Route::group(['prefix' => 'permissions'], function () {
         Route::apiResource('/planners', PlannerPermissionController::class);
+        Route::post('/mass-assign', [PlannerPermissionController::class, 'massAssign']);
       });
 
       // invite friend
