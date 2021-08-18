@@ -122,6 +122,7 @@ function ProfileHome() {
               <label htmlFor="">Date of birth</label>
               <input
                 type="date"
+                name="birth_date"
                 placeholder="Date of birth"
                 className="form-control form-control-sm"
                 value={formik.values.birth_date}
@@ -134,6 +135,7 @@ function ProfileHome() {
                 type="text"
                 placeholder="Company"
                 className="form-control form-control-sm"
+                name="company"
                 value={formik.values.company}
                 onChange={formik.handleChange}
               />
@@ -143,6 +145,7 @@ function ProfileHome() {
               <input
                 type="number"
                 placeholder="Phone number"
+                name="phone"
                 className="form-control form-control-sm"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
