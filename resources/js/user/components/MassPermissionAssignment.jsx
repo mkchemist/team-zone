@@ -202,7 +202,7 @@ function MassPermissionAssignment() {
                 <label htmlFor="">Friends</label>
                 <ul className="nav col-12 border p-2" style={{ height:100 ,overflow: 'auto' }}>
                   {friends.data.map((friend) => (
-                    <li key={friend.id} className="col-4 nav-item">
+                    <li key={friend.id} className="col-12 nav-item">
                       <input
                         type="checkbox"
                         value={friend.id}
