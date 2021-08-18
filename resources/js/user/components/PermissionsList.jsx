@@ -11,7 +11,11 @@ import { defaultProfileImage, profileImage } from "../../utils/utils";
 
 function PermissionsList({ data }) {
   let dispatch = useDispatch();
-
+  let [viewData, setViewData] = React.useState([]);
+  let [searchUser, setSearchUser] = React.useState("");
+  let [searchCalendar, setSearchCalendar] = React.useState("");
+  let [searchPlanner, setSearchPlanner] = React.useState("");
+  let [searchPermission, setSearchPermission] = React.useState("");
   const deletePermission = (permission) => {
     window.event.preventDefault();
     Swal.fire({
@@ -46,24 +50,96 @@ function PermissionsList({ data }) {
     });
   };
 
+  React.useEffect(() => {
+    let $data = data;
+
+    if (searchPermission) {
+      $data = $data.filter((i) =>
+        i.permission.toLowerCase().includes(searchPermission.toLowerCase())
+      );
+    }
+
+    if (searchCalendar) {
+      $data = $data.filter((i) =>
+        i.calendar.title.toLowerCase().includes(searchCalendar.toLowerCase())
+      );
+    }
+    if (searchPlanner) {
+      $data = $data.filter((i) =>
+        i.planner.title.toLowerCase().includes(searchPlanner.toLowerCase())
+      );
+    }
+
+    if (searchUser) {
+      $data = $data.filter((i) =>
+        i.user.name.toLowerCase().includes(searchUser.toLowerCase())
+      );
+    }
+
+    setViewData($data);
+  }, [searchPermission, searchPlanner, searchUser, setSearchCalendar, data]);
+
   return (
     <div>
       {data.length ? (
         <div>
+          <div className="my-2">
+            Total result found : <b>{viewData.length}</b>
+          </div>
           <table className="table table-striped table-sm small">
             <thead>
               <tr>
                 <th>Action</th>
-                <th>User</th>
+                <th className="">
+                  <span>User</span>
+                  <br />
+                  <input
+                    type="search"
+                    className="form-control form-control-sm"
+                    value={searchUser}
+                    onChange={(e) => setSearchUser(e.target.value)}
+                    style={{ width: 150 }}
+                  />
+                </th>
                 <th>User Profile</th>
-                <th>Calendar</th>
-                <th>Planner</th>
-                <th>Permission</th>
+                <th className="">
+                  <span>Calendar</span>
+                  <br />
+                  <input
+                    type="search"
+                    className="form-control form-control-sm"
+                    style={{ width: 150 }}
+                    value={searchCalendar}
+                    onChange={(e) => setSearchCalendar(e.target.value)}
+                  />
+                </th>
+                <th>
+                  <span>Planner</span>
+                  <br />
+                  <input
+                    type="search"
+                    className="form-control form-control-sm"
+                    style={{ width: 150 }}
+                    value={searchPlanner}
+                    onChange={(e) => setSearchPlanner(e.target.value)}
+                  />
+                </th>
+                <th>
+                  <span>Permission</span>
+                  <br />
+                  <input
+                    type="search"
+                    className="form-control form-control-sm"
+                    style={{ width: 150 }}
+                    value={searchPermission}
+                    onChange={(e) => setSearchPermission(e.target.value)}
+                  />
+                </th>
                 <th>Planner Icon</th>
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
+              {viewData.map((item) => (
                 <tr key={item.id}>
                   <td className="dropdown">
                     <a

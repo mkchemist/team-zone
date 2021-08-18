@@ -83,10 +83,11 @@ function ViewCalendarPlannerContent({ events }) {
 
   const TooltipAccessor = (event) => {
     return `
-title: ${event.title}
-from ${event.start} to ${event.end}
-planner : ${event.planner.title}
-created by : ${event.user.name}
+Title: ${event.title}
+From: ${event.start}
+To: ${event.end}
+Planner : ${event.planner.title}
+Created by : ${event.user.name}
 By : ${event.who}
 In: ${event.where}
 content:

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Switch, useRouteMatch, Route } from "react-router-dom";
 import useFriendsStore from "../../hooks/useFriendsStore";
 import AddFriend from "./friends/AddFriend";
+import FriendProfilePage from "./friends/FriendProfilePage";
 import FriendsHome from "./friends/FriendsHome";
 import FriendsPermissions from "./friends/FriendsPermissions";
 
@@ -48,6 +49,9 @@ export default function FriendsPage() {
             </Route>
             <Route path={`${path}/permissions`}>
               <FriendsPermissions />
+            </Route>
+            <Route path={`${path}/profile/:id`}>
+              <FriendProfilePage />
             </Route>
           </Switch>
         </div>

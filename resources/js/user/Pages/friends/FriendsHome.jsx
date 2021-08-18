@@ -72,13 +72,13 @@ function FriendsHome() {
                 />
               </div>
               <div className="col">
-                <p className="mb-0">{friend.name}</p>
+                <Link to={`friends/profile/${friend.id}`} className="mb-0">{friend.name}</Link>
                 <p className="mb-0 text-muted small">{friend.email}</p>
                 <div>
-                  <a href="" className="badge badge-primary mr-1">
+                  <Link to={`friends/profile/${friend.id}`} className="badge badge-primary mr-1">
                     <span className="fa fa-book mr-1"></span>
                     <span>View</span>
-                  </a>
+                  </Link>
                   {friend.accepted ? (
                     <>
                      <a href="" className="badge badge-danger" onClick={e => removeFriend(friend)}>

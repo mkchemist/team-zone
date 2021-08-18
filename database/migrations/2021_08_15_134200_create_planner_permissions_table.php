@@ -21,10 +21,10 @@ class CreatePlannerPermissionsTable extends Migration
             $table->bigInteger('planner_id')->unsigned();
             $table->string('permission');
             $table->timestamps();
-            $table->foreign('owner_id')->references('id')->on('users');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('calendar_id')->references('id')->on('calendars');
-            $table->foreign('planner_id')->references('id')->on('planners');
+            $table->foreign('owner_id')->references('id')->on('users')->OnDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->OnDelete('cascade');
+            $table->foreign('calendar_id')->references('id')->on('calendars')->OnDelete('cascade');
+            $table->foreign('planner_id')->references('id')->on('planners')->OnDelete('cascade');
         });
     }
 
