@@ -16,7 +16,6 @@ function PlannerList() {
   const location = useLocation();
   const [searchKey, setSearchKey] = React.useState(null);
 
-
   React.useEffect(() => {
     if (PlannerStore.status === "idle") {
       getPlanners();
@@ -52,7 +51,7 @@ function PlannerList() {
       </p>
       <hr />
       <div className="my-2">
-        {planners.length ? (
+        {PlannerStore.data.length ? (
           <div>
             <div className="my-2">
               <input
@@ -61,11 +60,15 @@ function PlannerList() {
                 name="search_planners_list"
                 className="form-control form-control-sm"
                 placeholder="Search planners"
-                onChange={e => setSearchKey(e.target.value)}
+                onChange={(e) => setSearchKey(e.target.value)}
               />
             </div>
             <hr />
-            <PlannerListComponent list={planners} />
+            {planners.length ? (
+              <PlannerListComponent list={planners} />
+            ) : (
+              <NoDataFound text={`${searchKey} not found`} />
+            )}
           </div>
         ) : PlannerStore.status === "succeeded" && !planners.length ? (
           <NoDataFound />

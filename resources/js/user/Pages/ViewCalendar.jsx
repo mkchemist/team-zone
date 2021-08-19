@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
+import DownloadButton from "../../components/DownloadButton";
 import apiScheme from "../../constant/api-scheme";
 import HttpService from "../../service/http-service";
 import { startFetchingCalendars } from "../../store/actions/calendar-actions";
@@ -81,6 +82,14 @@ function ViewCalendar() {
             onUpdate={updateActivePlannerList}
           />
           <div className="my-2">
+            {currentViewCalendar && (
+              <DownloadButton
+                data={events}
+                keys={["start", "end", "title", "who", "where", "content"]}
+                name={`${currentViewCalendar.title}`}
+                buttons={['pdf', 'excel']}
+              />
+            )}
             <BackButton />
           </div>
         </div>
@@ -93,7 +102,9 @@ function ViewCalendar() {
                   alt={`Calendar ${currentViewCalendar.title}`}
                   className="icon-img mr-1"
                 />
-                <span className="text-primary">{currentViewCalendar.title}</span>
+                <span className="text-primary">
+                  {currentViewCalendar.title}
+                </span>
               </p>
             ) : null}
             <hr />

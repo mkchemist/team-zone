@@ -86,7 +86,34 @@ const PlannerListComponentItem = ({ item }) => {
           </p>
         </div>
         <div className="text-center">
-          <div className="btn-group btn-group-sm my-lg-0 my-1">
+          <div className="dropleft">
+            <a href="" className="dropdown-toggle text-dark" data-toggle="dropdown">
+              <span className="fa fa-wrench mr-1"></span>
+              <span>Action</span>
+            </a>
+            <div className="dropdown-menu">
+            {userPermission.can_update || userPermission.can_delete ? (
+              <Link
+                to={`/planners/edit/${item.id}`}
+                className="dropdown-item small"
+              >
+                <span className="far fa-edit mr-1"></span>
+                <span>Edit</span>
+              </Link>
+            ) : null}
+            {userPermission.can_delete ? (
+              <a
+                href=""
+                className="dropdown-item small"
+                onClick={(e) => deletePlanner(item)}
+              >
+                <span className="fa fa-trash mr-1"></span>
+                <span>Delete</span>
+              </a>
+            ) : null}
+            </div>
+          </div>
+         {/*  <div className="btn-group btn-group-sm my-lg-0 my-1">
             {userPermission.can_update || userPermission.can_delete ? (
               <Link
                 to={`/planners/edit/${item.id}`}
@@ -106,7 +133,7 @@ const PlannerListComponentItem = ({ item }) => {
                 <span>Delete</span>
               </a>
             ) : null}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

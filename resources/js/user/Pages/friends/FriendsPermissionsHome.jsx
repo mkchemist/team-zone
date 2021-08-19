@@ -13,18 +13,23 @@ export default function FriendsPermissionsHome() {
   let dispatch =useDispatch();
   let permissionStore = useSelector(state => state.PermissionsStore);
   let [permissions, setPermissions] = useState([]);
+  let [search, setSearch] = useState(null)
   const fetchPermissions = () => {
     dispatch(fetchPermissions());
   }
 
 
   useEffect(() => {
-    setPermissions(permissionStore.friendsPermissions);
-  }, [permissionStore.status]);
+    let $permissions = permissionStore.friendsPermissions;
+    if(search) {
+      $permissions = $permissions.filter(p => p.user.name.toLowerCase().includes(search.toLowerCase()))
+    }
+    setPermissions($permissions);
+  }, [permissionStore.status, search]);
 
 
   const handleSearch = (keyword) => {
-    console.log(keyword);
+    setSearch(keyword)
   };
   return (
     <div className="p-2">

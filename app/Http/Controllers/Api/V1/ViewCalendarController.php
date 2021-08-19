@@ -16,7 +16,9 @@ class ViewCalendarController extends Controller
         ->where('calendar_id', $id)
         ->where('deleted_at', null)
         ->get();
-      })->simplePaginate(100);
+      })
+      ->orderBy('start')
+      ->simplePaginate(100);
 
       return PlannerEventResource::collection($events);
     }

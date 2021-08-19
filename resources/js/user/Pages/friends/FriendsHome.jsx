@@ -13,11 +13,31 @@ import { fetchFriends } from "../../../store/actions/friends-actions";
 import { defaultProfileImage, profileImage } from "../../../utils/utils";
 
 function FriendsHome() {
-  let friends = useSelector((state) => state.FriendsStore);
-  let dispatch =useDispatch()
+  let friendsStore = useSelector((state) => state.FriendsStore);
+  let [friends, setFriends] = React.useState([]);
+  let [search, setSearch] = React.useState(null);
+  let dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (friendsStore.status === "idle") {
+      dispatch(fetchFriends());
+    }
+    let $friends = friendsStore.data;
+    if (search) {
+      $friends = $friends.filter((friend) => {
+        return (
+          friend.name.toLowerCase().includes(search.toLowerCase()) ||
+          friend.email.toLowerCase().includes(search.toLowerCase())
+        );
+      });
+    }
+
+    setFriends($friends);
+
+  }, [friendsStore.status, search]);
 
   const onSearch = (keyword) => {
-    console.log(keyword);
+    setSearch(keyword)
   };
 
   const removeFriend = (friend) => {
@@ -37,9 +57,9 @@ function FriendsHome() {
       console.log(err)
     }); */
     removeFromFriendList(friend.relation_id)
-    .then(() => dispatch(fetchFriends()))
-    .catch(err => console.log(err))
-  }
+      .then(() => dispatch(fetchFriends()))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="p-2">
@@ -50,16 +70,25 @@ function FriendsHome() {
           autoSearch={true}
           className="col"
         />
-        <button className="btn btn-sm btn-primary" onClick={e => dispatch(fetchFriends())}>
+        <button
+          className="btn btn-sm btn-primary"
+          onClick={(e) => dispatch(fetchFriends())}
+        >
           <span className="fa fa-sync-alt mr-1"></span>
           <span>refresh</span>
         </button>
       </div>
       <hr />
-      {friends.data.length ? (
+      {friendsStore.data.length ? (
         <div>
-          {friends.data.map((friend) => (
-            <div className="row mx-auto pb-3 my-2 border-bottom align-items-center" key={friend.id}>
+          <p>
+            Total friends : {friends.length} found
+          </p>
+          {friends.map((friend) => (
+            <div
+              className="row mx-auto pb-3 my-2 border-bottom align-items-center"
+              key={friend.id}
+            >
               <div className="col-1">
                 <img
                   src={
@@ -72,26 +101,39 @@ function FriendsHome() {
                 />
               </div>
               <div className="col">
-                <Link to={`friends/profile/${friend.id}`} className="mb-0">{friend.name}</Link>
+                <Link to={`friends/profile/${friend.id}`} className="mb-0">
+                  {friend.name}
+                </Link>
                 <p className="mb-0 text-muted small">{friend.email}</p>
                 <div>
-                  <Link to={`friends/profile/${friend.id}`} className="badge badge-primary mr-1">
+                  <Link
+                    to={`friends/profile/${friend.id}`}
+                    className="badge badge-primary mr-1"
+                  >
                     <span className="fa fa-book mr-1"></span>
                     <span>View</span>
                   </Link>
                   {friend.accepted ? (
                     <>
-                     <a href="" className="badge badge-danger" onClick={e => removeFriend(friend)}>
-                       <span className="fa fa-user-slash mr-1"></span>
-                       <span>Unfriend</span>
-                     </a>
+                      <a
+                        href=""
+                        className="badge badge-danger"
+                        onClick={(e) => removeFriend(friend)}
+                      >
+                        <span className="fa fa-user-slash mr-1"></span>
+                        <span>Unfriend</span>
+                      </a>
                     </>
                   ) : (
                     <>
-                     <a href="" className="badge badge-secondary" onClick={e => removeFriend(friend)}>
-                       <span className="fa fa-times mr-1"></span>
-                       <span>Cancel friend request</span>
-                     </a>
+                      <a
+                        href=""
+                        className="badge badge-secondary"
+                        onClick={(e) => removeFriend(friend)}
+                      >
+                        <span className="fa fa-times mr-1"></span>
+                        <span>Cancel friend request</span>
+                      </a>
                     </>
                   )}
                 </div>
@@ -99,7 +141,7 @@ function FriendsHome() {
             </div>
           ))}
         </div>
-      ) : friends.status === "succeeded" && !friends.data.length ? (
+      ) : friendsStore.status === "succeeded" && !friendsStore.data.length ? (
         <>
           <NoDataFound text={"No Friends found"} />
           <div className="text-center">

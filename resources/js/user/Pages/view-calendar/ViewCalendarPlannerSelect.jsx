@@ -44,15 +44,16 @@ function ViewCalendarPlannerSelect({ list, onUpdate }) {
 
   return (
     <div>
-      <div className="border rounded p-2">
+      <div className="border rounded p-2 shadow-sm">
         <p className="lead mb-0">Planners</p>
         <hr />
         {calendarPlanners.length ? (
-          <nav className="nav">
+          <nav className="nav align-items-center">
             {calendarPlanners.map((item, itemIndex) => (
               <li
                 key={`list_item_${itemIndex}_${item.id}`}
-                className="col-12 nav-item"
+                className="col-12 nav-item small mb-1 pl-1 rounded shadow-sm"
+                style={{ backgroundColor: item.style.backgroundColor, color: item.style.color }}
               >
                 <input
                   type="checkbox"
@@ -61,7 +62,7 @@ function ViewCalendarPlannerSelect({ list, onUpdate }) {
                   checked={viewList.includes(item.title)}
                   onChange={(e) => handleViewListChange(item.title)}
                 />
-                <label htmlFor="" className="small">
+                <label htmlFor="" className="small font-weight-bold">
                   {item.title}
                 </label>
               </li>
