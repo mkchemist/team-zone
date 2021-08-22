@@ -1,7 +1,8 @@
 <div class="bg-primary shadow">
   <nav class="navbar navbar-expand-lg navbar-dark container-fluid">
       <a href="{{ url('/') }}" class="navbar-brand font-weight-bolder">
-        <span class="far fa-calendar-check text-lightgreen"></span>
+        {{-- <span class="far fa-calendar-check text-lightgreen"></span> --}}
+        <img src="{{ asset('images/app/teamzone.svg') }}" alt="" class="icon-img-xl">
         <span>Team</span><span class="text-lightgreen"> Zone</span>
       </a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#home_navbar">
