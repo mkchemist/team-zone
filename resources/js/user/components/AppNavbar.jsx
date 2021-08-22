@@ -19,7 +19,8 @@ function AppNavbar() {
     <div className="bg-primary shadow">
       <nav className="container-fluid navbar navbar-expand-lg navbar-dark">
         <Link to="/" className="navbar-brand">
-          <span className="far fa-calendar-check mx-1 text-lightgreen"></span>
+         {/*  <span className="far fa-calendar-check mx-1 text-lightgreen"></span> */}
+          <img src={imgUrl("teamzone.svg")} alt="" className="icon-img-xl"/>
           <span className="font-weight-bold">
             Team <span className="text-lightgreen">Zone</span>
           </span>

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shared.css') }}">
     <link rel="stylesheet" href="{{ asset('libs/fontawesome-free-5.15.3-web/css/all.min.css') }}">
-    <link rel="icon" href="{{ asset('images/app/teamzone.svg') }}">
+    <link rel="icon" type="image/svg" sizes="500x500" href="{{ asset('images/app/teamzone.svg') }}">
+    <link rel="shortcut icon" size="300x300" href="{{ asset('images/app/teamzone.svg') }}">
     <style>
         @font-face {
             font-family: 'Poppins';
