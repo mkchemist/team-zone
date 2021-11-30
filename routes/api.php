@@ -83,3 +83,8 @@ Route::group(["middleware" => ["auth:api"]], function () {
   });
 
 });
+
+
+Route::get('/api-test', function() {
+  return "Hello,World";
+});
